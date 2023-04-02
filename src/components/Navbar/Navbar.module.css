@@ -1,15 +1,45 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
 .navbar{
+  color: rgb(63, 63, 63);
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding: 0 7.5%;
+  background-color: rgb(244, 199, 224);
+  box-shadow: 0px 3px 5px rgb(164, 164, 164);
+}
+
+.navbar .contenedorLogo{
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  color: rgb(63, 63, 63);
+}
+
+.navbar .contenedorLogo div{
+  text-align: center;
+}
+
+.navbar .contenedorLogo img{
+  width: 40px;
+  height: auto;
+  border-radius: 150%;
+  margin: .05rem;
 }
 
 .navbar ul{
   display: flex;
   text-decoration: none;
   list-style: none;
-  gap: 10px;
+  gap: 2.5rem;
 }
 
-.navbar ul li{
-  
+.navbar ul a{
+  font-size: 1.5rem;
+  color: rgb(63, 63, 63);
 }
+

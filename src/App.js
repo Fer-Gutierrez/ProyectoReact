@@ -1,9 +1,13 @@
-import Navbar from "./components/Navbar/Navbar";
+import ItemListContainer from "./components/ItemList/ItemListContainer";
+import NavbarContainer from "./components/Navbar/NavbarContainer";
 
 function App() {
+  const saludo = "Hola soy un saludo!! ¿Como estas?";
+
   return (
-    <div className="App">
-      <Navbar />
+    <div>
+      <NavbarContainer />
+      <ItemListContainer saludo={saludo} />
     </div>
   );
 }

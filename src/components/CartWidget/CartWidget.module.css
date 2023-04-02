@@ -1,0 +1,25 @@
+.cart {
+  position: relative;
+  padding: 10px;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.cartCounter {
+  display: flex;
+  background-color: red;
+  min-width: 1.8rem;
+  min-height: 1.8rem;
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-radius: 150%;
+  border: solid 2px white;
+}
+
+.cartCounter span {
+  font-size: 1rem;
+  margin: auto;
+  color: white;
+}
