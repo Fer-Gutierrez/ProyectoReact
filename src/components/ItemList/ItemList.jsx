@@ -1,10 +1,16 @@
+import CardItem from "./CardItem";
 import styles from "./ItemList.module.css";
+import Typography from "@mui/material/Typography";
 
-const ItemList = ({ saludo }) => {
+const ItemList = ({ items, category }) => {
   return (
-    <div className={styles.itemList}>
-      <h1>Listado de Items</h1>
-      <p style={{ color: "red" }}>{saludo}</p>
+    <div>
+      <h1>{category}</h1>
+      <div className={styles.itemList}>
+        {items.map(item => {
+          return <CardItem item={item} key={item.id} />;
+        })}
+      </div>
     </div>
   );
 };

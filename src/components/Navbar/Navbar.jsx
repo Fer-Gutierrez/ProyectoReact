@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <div className={styles.navbar}>
       <a href="" className={styles.contenedorLogo}>
-      <img src="LogoMiUniverso2.jpg" alt="" />
+        <img src="LogoMiUniverso2.jpg" alt="" />
         <div>
           <span>Mi Universo</span> <br />
           <span>Astral</span>
@@ -14,6 +14,9 @@ const Navbar = () => {
       <ul>
         <li className="item">
           <a href="">Velas</a>
+        </li>
+        <li className="item">
+          <a href="">Mates</a>
         </li>
         <li className="item">
           <a href="#">Tarot</a>
