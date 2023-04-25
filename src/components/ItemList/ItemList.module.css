@@ -4,3 +4,14 @@
   padding: 10px;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
 }
+
+.itemListContainer {
+  padding: 0 7.5%;
+}
+
+.itemListContainer h1 {
+  color: #d0a9a2;
+  padding: 30px 0;
+  text-align: center;
+  font-size: 3rem;
+}

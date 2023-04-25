@@ -123,7 +123,7 @@ export const products = [
     name: "Vela motivacional",
     description:
       "Vaso de 9 cm de alto x 8 cm de diámetro.Sticker con frase o palabra inspiracional. Pabilo de algodón. Envase reutilizable. Vela de soja hecha a mano. Aroma Café de Venecia",
-    price: 100,
+    price: 2000,
     category: "Velas",
     img: "https://res.cloudinary.com/dduwd2qy1/image/upload/v1682204914/Mi%20Universo%20Astral/velas/img_0038.jpgw_1_r7vgzl.jpg",
     stock: 25,
@@ -134,7 +134,7 @@ export const products = [
     name: "Vela de pasión",
     description:
       "Vaso de 9 cm de alto x 8 cm de diámetro.Sticker con frase o palabra inspiracional. Pabilo de algodón. Envase reutilizable. Vela de soja hecha a mano. Aroma Café de Gardenia",
-    price: 100,
+    price: 2000,
     category: "Velas",
     img: "https://res.cloudinary.com/dduwd2qy1/image/upload/v1682204851/Mi%20Universo%20Astral/velas/img_5304_2_ysswlir800n6wjbh_otvgwx.jpg",
     stock: 10,
@@ -145,7 +145,7 @@ export const products = [
     name: "Vela de amor",
     description:
       "Vaso de 9 cm de alto x 8 cm de diámetro.Sticker con frase o palabra inspiracional. Pabilo de algodón. Envase reutilizable. Vela de soja hecha a mano. Aroma Rosa y Sándalo",
-    price: 100,
+    price: 1800,
     category: "Velas",
     img: "https://res.cloudinary.com/dduwd2qy1/image/upload/v1682204731/Mi%20Universo%20Astral/velas/img_0110.jpgw_1_y1utqf.jpg",
     stock: 12,
@@ -156,7 +156,7 @@ export const products = [
     name: "Vela de prosperidad",
     description:
       "Vaso de 9 cm de alto x 8 cm de diámetro.Sticker con frase o palabra inspiracional. Pabilo de algodón. Envase reutilizable. Vela de soja hecha a mano. Aroma Vervena.",
-    price: 100,
+    price: 1900,
     category: "Velas",
     img: "https://res.cloudinary.com/dduwd2qy1/image/upload/v1682204711/Mi%20Universo%20Astral/velas/img_7367.jpgw_wuqeag.jpg",
     stock: 15,

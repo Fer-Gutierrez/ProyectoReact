@@ -15,7 +15,7 @@ const ItemListContainer = () => {
           prod => prod.category.toLowerCase() === categoryName?.toLowerCase()
         );
         resolve(categoryName ? productsFiltered : products);
-      }, 2000);
+      }, 500);
     });
 
     APIProductos.then(res => setItems(res)).catch(err => console.log(err));

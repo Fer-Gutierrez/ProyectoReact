@@ -8,9 +8,10 @@
   margin: 5px !important;
 }
 
+
 .MuiCardContent {
   padding: 1rem 0.5rem !important;
-  height: 5em !important;
+  height: 6em !important;
 }
 
 .MuiCardMedia {
@@ -20,12 +21,20 @@
 
 .MuiCardActions {
   padding: 0 !important;
-  height: 33px !important;
+  height: max-content !important;
 }
 
-.lineClamp {
+.lineMaxDescription {
   display: -webkit-box !important;
-  -webkit-line-clamp: 4 !important;
+  -webkit-line-clamp: 3 !important;
   -webkit-box-orient: vertical !important;
   overflow: hidden !important;
 }
+
+.lineMaxTitle {
+  display: -webkit-box !important;
+  -webkit-line-clamp: 1 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+
