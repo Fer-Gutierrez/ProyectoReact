@@ -43,12 +43,12 @@ const ItemDetail = ({ product, counter, decrement, increment }) => {
           >
             {product.description}
           </Typography>
-          <Typography variant="h4" color="primary.dark" margin={"20px 0 0 0"}>
+          <Typography variant="h4" color="primary.dark" marginTop={"10px"}>
             $ {product.price}
           </Typography>
           {product.reqStock && <Typography>Stock disponible: {product.stock} unidades.</Typography>}
           {product.reqStock && (
-            <Box display={"flex"} alignItems={"center"}>
+            <Box display={"flex"} alignItems={"center"} marginTop={"10px"}>
               <Typography variant="h5" fontWeight={300}>
                 Cantidad:
               </Typography>
@@ -67,6 +67,7 @@ const ItemDetail = ({ product, counter, decrement, increment }) => {
           >
             COMPRAR
           </Button>
+          {!product.reqStock && <Typography variant="body1" color="primary.light" fontWeight={300}>*La fecha del servicio se define segun disponibilidad en agenda.</Typography>}
         </Box>
       </Box>
     </Box>

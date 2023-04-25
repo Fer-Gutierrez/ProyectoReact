@@ -42,6 +42,17 @@ const CardItem = ({ item }) => {
             >
               {item.description}
             </Typography>
+            <Typography
+              variant="h4"
+              color={"primary.main"}
+              padding={".3rem"}
+              paddingTop={".7rem"}
+            >
+              ${" "}
+              {Number(item.price).toLocaleString("es-AR", {
+                minimumFractionDigits: 2,
+              })}
+            </Typography>
           </CardContent>
         </Link>
       </CardActionArea>
