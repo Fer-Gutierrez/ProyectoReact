@@ -12,7 +12,12 @@ const ItemDetailContainer = () => {
   useEffect(() => {
     let encontrado = products.find(prod => prod.id === +id);
     setTimeout(() => {
-      setProduct(encontrado);
+      setProduct({
+        ...encontrado,
+        price: Number(encontrado?.price).toLocaleString("es-AR", {
+          minimumFractionDigits: 2,
+        }),
+      });
     }, 500);
   }, [id]);
 
