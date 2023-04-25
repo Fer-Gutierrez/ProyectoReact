@@ -5,7 +5,7 @@ import { products } from "../../products-Mock";
 import useCounter from "../../utils/hooks/UseCounter";
 
 const ItemDetailContainer = () => {
-  const { counter, increment, decrement, reset } = useCounter(0);
+  const { counter, increment, decrement, reset } = useCounter(1);
   const [product, setProduct] = useState({});
   const { id } = useParams();
 
@@ -16,10 +16,14 @@ const ItemDetailContainer = () => {
     }, 500);
   }, [id]);
 
-
   return (
     <div>
-      <ItemDetail product={product} counter={counter} decrement={decrement} increment={increment} />
+      <ItemDetail
+        product={product}
+        counter={counter}
+        decrement={decrement}
+        increment={increment}
+      />
     </div>
   );
 };

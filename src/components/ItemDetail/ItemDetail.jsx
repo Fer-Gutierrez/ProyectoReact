@@ -5,7 +5,7 @@ import styles from "./ItemDetail.module.css";
 
 const ItemDetail = ({ product, counter, decrement, increment }) => {
   return (
-    <Box padding={"70px 7.5% 0 7.5%"}>
+    <Box padding={"70px 7.5% 0 7.5%"} marginBottom={7}>
       <Box
         border={"solid 1px"}
         borderColor={"primary.light"}
@@ -27,25 +27,44 @@ const ItemDetail = ({ product, counter, decrement, increment }) => {
           />
         </Box>
         <Box padding={"10px"}>
-          <Typography variant="h4" color="secondary.dark" margin={"10px 0px"}>
+          <Typography
+            variant="h3"
+            fontWeight={600}
+            color="secondary.dark"
+            margin={"10px 0px"}
+          >
             {product.name}
           </Typography>
-          <Typography variant="body1" color="primary.light">
+          <Typography
+            variant="body1"
+            fontWeight={300}
+            fontSize={"1.5rem"}
+            color="primary.light"
+          >
             {product.description}
           </Typography>
           <Typography variant="h4" color="primary.dark" margin={"20px 0 0 0"}>
             $ {product.price}
           </Typography>
-          {product.reqStock && <Typography>Stock: {product.stock}</Typography>}
+          {product.reqStock && <Typography>Stock disponible: {product.stock} unidades.</Typography>}
           {product.reqStock && (
-            <Counter
-              product={product}
-              counter={counter}
-              decrement={decrement}
-              increment={increment}
-            />
+            <Box display={"flex"} alignItems={"center"}>
+              <Typography variant="h5" fontWeight={300}>
+                Cantidad:
+              </Typography>
+              <Counter
+                product={product}
+                counter={counter}
+                decrement={decrement}
+                increment={increment}
+              />
+            </Box>
           )}
-          <Button variant="contained" color="secondary" style={{ margin: 10 }}>
+          <Button
+            variant="contained"
+            color="secondary"
+            style={{ margin: "10px 0", padding: "5", fontSize:14 }}
+          >
             COMPRAR
           </Button>
         </Box>

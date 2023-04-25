@@ -1,5 +1,6 @@
 .imgDescription {
   width: 70%;
+  max-height: 400px;
   margin: 0 auto;
   object-fit: cover;
 }

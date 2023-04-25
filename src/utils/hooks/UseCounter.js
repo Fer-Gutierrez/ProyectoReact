@@ -10,7 +10,7 @@ const useCounter = initial => {
   };
 
   const decrement = () => {
-    counter > 0 ? setCounter(counter - 1) : setCounter(0);
+    counter > 1 ? setCounter(counter - 1) : setCounter(1);
   };
 
   const reset = () => {
