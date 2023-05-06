@@ -1,16 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import UseAlert from "../alerts/UseAlert";
 
-const useCounter = initial => {
+const useCounter = (initial = 1) => {
   const [counter, setCounter] = useState(initial);
 
-  const increment = max => {
-    console.log(max);
-    console.log(counter);
-    counter < max ? setCounter(counter + 1) : setCounter(max);
+  const { alertInfo } = UseAlert();
+
+  useEffect(() => {
+    setCounter(initial);
+  }, [initial]);
+
+  const increment = (max) => {
+    counter < max
+      ? setCounter(counter + 1)
+      : alertInfo(`Hay sólo ${max} unidades de este producto`);
   };
 
   const decrement = () => {
-    counter > 1 ? setCounter(counter - 1) : setCounter(1);
+    counter > 1
+      ? setCounter(counter - 1)
+      : alertInfo(`La cantidad a comprar no puede ser menor a 1`);
   };
 
   const reset = () => {

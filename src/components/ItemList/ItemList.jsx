@@ -10,7 +10,7 @@ const ItemList = ({ items, category }) => {
       </Typography>
       <div className={styles.itemList}>
         {items.map(item => {
-          return <CardItem item={item} key={item.id} />;
+          return <CardItem item={item} key={item?.id} />;
         })}
       </div>
     </div>

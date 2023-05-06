@@ -3,6 +3,9 @@ import ItemListContainer from "./components/ItemList/ItemListContainer";
 import NavbarContainer from "./components/Navbar/NavbarContainer";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ItemDetailContainer from "./components/ItemDetail/ItemDetailContainer";
+import AlertToastify from "./utils/alerts/AlertToastify";
+import CartContextProvider from "./context/CartContext";
+import CartContainer from "./components/Cart/CartContainer";
 
 const theme = createTheme({
   typography: {
@@ -24,19 +27,26 @@ function App() {
     <ThemeProvider theme={theme}>
       <div>
         <BrowserRouter>
-          <Routes>
-            <Route element={<NavbarContainer />}>
-              <Route path="/" element={<ItemListContainer />} />
-              <Route
-                path="/category/:categoryName"
-                element={<ItemListContainer />}
-              />
-              <Route path="/itemdetail/:id" element={<ItemDetailContainer />} />
-            </Route>
+          <CartContextProvider>
+            <Routes>
+              <Route element={<NavbarContainer />}>
+                <Route path="/" element={<ItemListContainer />} />
+                <Route
+                  path="/category/:categoryName"
+                  element={<ItemListContainer />}
+                />
+                <Route
+                  path="/itemdetail/:id"
+                  element={<ItemDetailContainer />}
+                />
+                <Route path="/cart" element={<CartContainer />} />
+              </Route>
 
-            {/* Ruta para páginas nos encontradas */}
-            <Route path="*" element={<h1>Lo siento la ruta no existe</h1>} />
-          </Routes>
+              {/* Ruta para páginas nos encontradas */}
+              <Route path="*" element={<h1>Lo siento la ruta no existe</h1>} />
+            </Routes>
+          </CartContextProvider>
+          <AlertToastify />
         </BrowserRouter>
       </div>
     </ThemeProvider>

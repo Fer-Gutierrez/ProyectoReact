@@ -48,7 +48,7 @@ const CardItem = ({ item }) => {
               padding={".3rem"}
               paddingTop={".7rem"}
             >
-              ${" "}
+              $
               {Number(item.price).toLocaleString("es-AR", {
                 minimumFractionDigits: 2,
               })}

@@ -3,7 +3,7 @@ import React from "react";
 import Counter from "./Counter";
 import styles from "./ItemDetail.module.css";
 
-const ItemDetail = ({ product, counter, decrement, increment }) => {
+const ItemDetail = ({ product, counter, decrement, increment, onAdd }) => {
   return (
     <Box padding={"70px 7.5% 0 7.5%"} marginBottom={7}>
       <Box
@@ -44,10 +44,15 @@ const ItemDetail = ({ product, counter, decrement, increment }) => {
             {product.description}
           </Typography>
           <Typography variant="h4" color="primary.dark" marginTop={"10px"}>
-            $ {product.price}
+            $
+            {Number(product.price).toLocaleString("es-AR", {
+              minimumFractionDigits: 2,
+            })}
           </Typography>
-          {product.reqStock && <Typography>Stock disponible: {product.stock} unidades.</Typography>}
           {product.reqStock && (
+            <Typography>Stock disponible: {product.stock} unidades.</Typography>
+          )}
+          {product.reqStock ? (
             <Box display={"flex"} alignItems={"center"} marginTop={"10px"}>
               <Typography variant="h5" fontWeight={300}>
                 Cantidad:
@@ -59,15 +64,30 @@ const ItemDetail = ({ product, counter, decrement, increment }) => {
                 increment={increment}
               />
             </Box>
+          ) : (
+            <Typography
+              variant="body1"
+              color="primary.light"
+              fontWeight={300}
+              marginTop={"15px"}
+              marginBottom={"0"}
+            >
+              Solo puedes llevar una unidad de este servicio.
+            </Typography>
           )}
           <Button
             variant="contained"
             color="secondary"
-            style={{ margin: "10px 0", padding: "5", fontSize:14 }}
+            style={{ margin: "10px 0", padding: "5", fontSize: 14 }}
+            onClick={() => onAdd(product)}
           >
-            COMPRAR
+            AGREGAR AL CARRITO
           </Button>
-          {!product.reqStock && <Typography variant="body1" color="primary.light" fontWeight={300}>*La fecha del servicio se define segun disponibilidad en agenda.</Typography>}
+          {!product.reqStock && (
+            <Typography variant="body1" color="primary.light" fontWeight={300}>
+              *La fecha del servicio se define segun disponibilidad en agenda.
+            </Typography>
+          )}
         </Box>
       </Box>
     </Box>

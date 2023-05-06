@@ -40,8 +40,9 @@ const Navbar = () => {
           </Typography>
         </Link>
       </ul>
-
-      <CartWidget />
+      <Link to={"/cart"} className={styles.cartWidget}>
+        <CartWidget />
+      </Link>
     </div>
   );
 };
