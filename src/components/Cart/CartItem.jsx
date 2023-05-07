@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import React from "react";
 
-const CartItem = ({ cart, deleteCartItem }) => {
+const CartItem = ({ cart, deleteCartItem, navigate }) => {
   return (
     <div>
       {cart.map((prod) => {
@@ -32,6 +32,16 @@ const CartItem = ({ cart, deleteCartItem }) => {
               style={{ margin: "10px 0", padding: "3px", fontSize: 10 }}
             >
               Eliminar
+            </Button>
+            <Button
+              onClick={() => {
+                navigate(`/itemdetail/${prod?.id}`);
+              }}
+              variant="contained"
+              color="secondary"
+              style={{ margin: "10px 0", padding: "3px", fontSize: 10 }}
+            >
+              Modificar
             </Button>
           </div>
         );

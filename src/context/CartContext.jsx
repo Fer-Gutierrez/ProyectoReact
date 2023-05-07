@@ -1,6 +1,6 @@
 import React, { createContext, useState } from "react";
 import UseAlert from "../utils/alerts/UseAlert";
-const { alertError } = UseAlert();
+const { alertError, alertYesNoQuestion } = UseAlert();
 export const CartContext = createContext();
 
 const CartContextProvider = ({ children }) => {
@@ -40,16 +40,26 @@ const CartContextProvider = ({ children }) => {
   };
 
   const deleteCart = () => {
-    setCart([]);
+    alertYesNoQuestion(
+      "¿Esta seguro que desea limpiar el carrito?",
+      () => setCart([]),
+      () => alertError("No se elimino")
+    );
   };
 
   const deleteCartItem = (id) => {
     let existe = isInCart(id);
     if (existe) {
-      let newCart = cart.filter((prod) => prod.id !== id);
-      setCart(newCart);
+      alertYesNoQuestion(
+        "¿Estas seguro que desea quitar el producto del carrito?",
+        () => {
+          let newCart = cart.filter((prod) => prod.id !== id);
+          setCart(newCart);
+        },
+        () => {}
+      );
     } else {
-      alertError("Error: Imposible eliminar carrito");
+      alertError("Error: El producto no existe en el carrito.");
     }
   };
 

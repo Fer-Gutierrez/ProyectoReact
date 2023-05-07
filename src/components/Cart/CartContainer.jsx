@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import Cart from "./Cart";
 import { CartContext } from "../../context/CartContext";
+import { useNavigate } from "react-router-dom";
 
 const CartContainer = () => {
   const {
@@ -10,6 +11,8 @@ const CartContainer = () => {
     deleteCart,
     deleteCartItem,
   } = useContext(CartContext);
+
+  const navigate = useNavigate();
 
   let totalPrice = getTotalPriceCart();
   let totalQuantity = getTotalQuantityCart();
@@ -22,6 +25,7 @@ const CartContainer = () => {
         totalQuantity={totalQuantity}
         deleteCart={deleteCart}
         deleteCartItem={deleteCartItem}
+        navigate={navigate}
       />
     </div>
   );

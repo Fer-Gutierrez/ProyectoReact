@@ -8,6 +8,7 @@ const Cart = ({
   totalQuantity,
   deleteCartItem,
   deleteCart,
+  navigate,
 }) => {
   return (
     <div style={{ paddingTop: "50px" }}>
@@ -22,7 +23,11 @@ const Cart = ({
           >
             Tu carrito
           </Typography>
-          <CartItem cart={cart} deleteCartItem={deleteCartItem} />
+          <CartItem
+            cart={cart}
+            deleteCartItem={deleteCartItem}
+            navigate={navigate}
+          />
           <h1>
             Total de su compra: {"$ "}{" "}
             {Number(totalPrice).toLocaleString("es-AR", {
@@ -62,19 +67,17 @@ const Cart = ({
           >
             Tu carrito esta vacio.
           </Typography>
-          <Link to={"/"}>
-            <Button
-              variant="contained"
-              color="secondary"
-              style={{
-                margin: "10px auto 0 10px",
-                padding: "10px",
-                fontSize: 14,
-              }}
-            >
-              Agregar Productos
-            </Button>
-          </Link>
+          <Button
+            onClick={() => navigate("/")}
+            variant="contained"
+            color="secondary"
+            style={{
+              padding: "10px",
+              fontSize: 14,
+            }}
+          >
+            Agregar Productos
+          </Button>
         </div>
       )}
     </div>
