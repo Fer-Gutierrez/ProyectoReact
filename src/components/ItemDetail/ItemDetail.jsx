@@ -3,7 +3,15 @@ import React from "react";
 import Counter from "./Counter";
 import styles from "./ItemDetail.module.css";
 
-const ItemDetail = ({ product, counter, decrement, increment, onAdd }) => {
+const ItemDetail = ({
+  product,
+  counter,
+  decrement,
+  increment,
+  onAdd,
+  getTotalQuantityCart,
+  navigate,
+}) => {
   return (
     <Box padding={"70px 7.5% 0 7.5%"} marginBottom={7}>
       <Box
@@ -63,30 +71,51 @@ const ItemDetail = ({ product, counter, decrement, increment, onAdd }) => {
                 decrement={decrement}
                 increment={increment}
               />
+              <Button
+                variant="contained"
+                color="secondary"
+                style={{ margin: "10px 0", padding: "5", fontSize: 14 }}
+                onClick={() => onAdd(product)}
+              >
+                AGREGAR AL CARRITO
+              </Button>
             </Box>
           ) : (
-            <Typography
-              variant="body1"
-              color="primary.light"
-              fontWeight={300}
-              marginTop={"15px"}
-              marginBottom={"0"}
-            >
-              Solo puedes llevar una unidad de este servicio.
-            </Typography>
+            <Box>
+              <Typography
+                variant="body1"
+                color="primary.light"
+                fontWeight={300}
+                marginTop={"15px"}
+                marginBottom={"0"}
+              >
+                Solo puedes llevar una unidad de este servicio.
+              </Typography>
+              <Button
+                variant="contained"
+                color="secondary"
+                style={{ margin: "10px 0", padding: "5", fontSize: 14 }}
+                onClick={() => onAdd(product)}
+              >
+                AGREGAR AL CARRITO
+              </Button>
+            </Box>
           )}
-          <Button
-            variant="contained"
-            color="secondary"
-            style={{ margin: "10px 0", padding: "5", fontSize: 14 }}
-            onClick={() => onAdd(product)}
-          >
-            AGREGAR AL CARRITO
-          </Button>
+
           {!product.reqStock && (
             <Typography variant="body1" color="primary.light" fontWeight={300}>
               *La fecha del servicio se define segun disponibilidad en agenda.
             </Typography>
+          )}
+          {getTotalQuantityCart() > 0 && (
+            <Button
+              onClick={() => navigate("/cart")}
+              variant="contained"
+              color="secondary"
+              style={{ margin: "10px 0", padding: "5", fontSize: 14 }}
+            >
+              Terminar Compra
+            </Button>
           )}
         </Box>
       </Box>

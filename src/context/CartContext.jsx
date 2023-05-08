@@ -1,9 +1,10 @@
 import React, { createContext, useState } from "react";
 import UseAlert from "../utils/alerts/UseAlert";
-const { alertError, alertYesNoQuestion } = UseAlert();
+
 export const CartContext = createContext();
 
 const CartContextProvider = ({ children }) => {
+  const { alertError, alertYesNoQuestion, alertSucces } = UseAlert();
   const [cart, setCart] = useState([]);
 
   const isInCart = (id) => {
@@ -20,8 +21,10 @@ const CartContextProvider = ({ children }) => {
           : item;
       });
       setCart(newCart);
+      alertSucces("Se actualizó el producto en tu carrito.");
     } else {
       setCart([...cart, product]);
+      alertSucces("Se agregó el producto en tu carrito.");
     }
   };
 
