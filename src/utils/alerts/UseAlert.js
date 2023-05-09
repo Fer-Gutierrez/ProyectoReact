@@ -5,7 +5,7 @@ import { Button } from "@mui/material";
 const UseAlert = () => {
   const alertInfo = (mensaje) => {
     toast.info(mensaje, {
-      position: "top-left",
+      position: "bottom-left",
       autoClose: 1500,
       hideProgressBar: true,
       closeOnClick: true,
@@ -33,7 +33,21 @@ const UseAlert = () => {
 
   const alertSucces = (mensaje) => {
     toast.success(mensaje, {
-      position: "top-center",
+      position: "top-left",
+      autoClose: 1500,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      className: styles.alertWrapper,
+    });
+  };
+
+  const alertWarning = (mensaje) => {
+    toast.warning(mensaje, {
+      position: "bottom-right",
       autoClose: 1500,
       hideProgressBar: true,
       closeOnClick: true,
@@ -87,7 +101,13 @@ const UseAlert = () => {
     });
   };
 
-  return { alertInfo, alertError, alertSucces, alertYesNoQuestion };
+  return {
+    alertInfo,
+    alertError,
+    alertSucces,
+    alertWarning,
+    alertYesNoQuestion,
+  };
 };
 
 export default UseAlert;

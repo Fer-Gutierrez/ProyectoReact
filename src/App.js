@@ -6,6 +6,7 @@ import ItemDetailContainer from "./components/ItemDetail/ItemDetailContainer";
 import AlertToastify from "./utils/alerts/AlertToastify";
 import CartContextProvider from "./context/CartContext";
 import CartContainer from "./components/Cart/CartContainer";
+import YesNoModal from "./utils/modals/YesNoModal/YesNoModal";
 
 const theme = createTheme({
   typography: {
@@ -23,6 +24,7 @@ const theme = createTheme({
 });
 
 function App() {
+
   return (
     <ThemeProvider theme={theme}>
       <div>
@@ -47,6 +49,7 @@ function App() {
             </Routes>
           </CartContextProvider>
           <AlertToastify />
+          <YesNoModal />
         </BrowserRouter>
       </div>
     </ThemeProvider>

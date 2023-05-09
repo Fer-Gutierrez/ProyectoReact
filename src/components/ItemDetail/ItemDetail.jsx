@@ -36,7 +36,7 @@ const ItemDetail = ({
         </Box>
         <Box padding={"10px"}>
           <Typography
-            variant="h3"
+            variant={"h3"}
             fontWeight={600}
             color="secondary.dark"
             margin={"10px 0px"}
@@ -74,10 +74,15 @@ const ItemDetail = ({
               <Button
                 variant="contained"
                 color="secondary"
-                style={{ margin: "10px 0", padding: "5", fontSize: 14 }}
+                // style={{ margin: "10px 0", padding: "5", fontSize: 12 }}
+                fontSize={20}
                 onClick={() => onAdd(product)}
               >
-                AGREGAR AL CARRITO
+                <i
+                  style={{ fontSize: 14, marginRight: ".3em" }}
+                  className={"bi bi-bag-plus-fill"}
+                ></i>
+                <span>AGREGAR AL CARRITO</span>
               </Button>
             </Box>
           ) : (
@@ -94,10 +99,14 @@ const ItemDetail = ({
               <Button
                 variant="contained"
                 color="secondary"
-                style={{ margin: "10px 0", padding: "5", fontSize: 14 }}
+                style={{ margin: "10px 0", padding: "5", fontSize: 12 }}
                 onClick={() => onAdd(product)}
               >
-                AGREGAR AL CARRITO
+                <i
+                  style={{ fontSize: 14, marginRight: ".3em" }}
+                  className={"bi bi-bag-plus-fill"}
+                ></i>
+                <span>AGREGAR AL CARRITO</span>
               </Button>
             </Box>
           )}
@@ -112,7 +121,7 @@ const ItemDetail = ({
               onClick={() => navigate("/cart")}
               variant="contained"
               color="secondary"
-              style={{ margin: "10px 0", padding: "5", fontSize: 14 }}
+              style={{ margin: "10px 0", padding: "5", fontSize: 12 }}
             >
               Terminar Compra
             </Button>

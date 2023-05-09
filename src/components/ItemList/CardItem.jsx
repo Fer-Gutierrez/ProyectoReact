@@ -59,7 +59,7 @@ const CardItem = ({ item }) => {
       <CardActions className={styles.MuiCardActions}>
         <Tooltip title="Agregar al carrito">
           <Button className={styles.btnAgregarCarrito}>
-            <i className="bi bi-bag-plus-fill"></i>
+            <i className={"bi bi-bag-plus-fill"}></i>
           </Button>
         </Tooltip>
       </CardActions>

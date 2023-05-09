@@ -1,6 +1,5 @@
-import { Button, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import CartItem from "./CartItem";
-import { Link } from "react-router-dom";
 
 const Cart = ({
   cart,
@@ -35,6 +34,7 @@ const Cart = ({
             })}
           </h1>
           <h1>Estas llevando {totalQuantity} productos</h1>
+          <Box>
           <Button
             onClick={deleteCart}
             variant="contained"
@@ -47,6 +47,19 @@ const Cart = ({
           >
             Borrar Carrito
           </Button>
+          <Button
+            onClick={() => navigate("/")}
+            variant="contained"
+            color="secondary"
+            style={{
+              margin: "10px auto 0 10px",
+              padding: "10px",
+              fontSize: 14,
+            }}
+          >
+            Agregar mas productos
+          </Button>
+          </Box>
         </div>
       ) : (
         <div
