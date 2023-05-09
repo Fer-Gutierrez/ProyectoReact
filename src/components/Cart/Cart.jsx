@@ -10,7 +10,7 @@ const Cart = ({
   navigate,
 }) => {
   return (
-    <div style={{ paddingTop: "50px" }}>
+    <div style={{ padding: "70px 7.5% 0 7.5%" }}>
       {totalQuantity > 0 ? (
         <div style={{ display: "flex", flexDirection: "column" }}>
           <Typography

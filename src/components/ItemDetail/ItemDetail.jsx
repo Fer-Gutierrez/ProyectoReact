@@ -74,7 +74,7 @@ const ItemDetail = ({
               <Button
                 variant="contained"
                 color="secondary"
-                // style={{ margin: "10px 0", padding: "5", fontSize: 12 }}
+                style={{ margin: "10px 0", padding: "5", fontSize: 12 }}
                 fontSize={20}
                 onClick={() => onAdd(product)}
               >

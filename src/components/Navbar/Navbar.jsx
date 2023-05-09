@@ -2,9 +2,10 @@ import { Link } from "react-router-dom";
 import CartWidget from "../CartWidget/CartWidget";
 import styles from "./Navbar.module.css";
 import { Typography } from "@mui/material";
+import { MoonLoader } from "react-spinners";
 
-const Navbar = () => {
-  return (
+const Navbar = ({ total, categories }) => {
+  return categories.length > 0 ? (
     <div className={styles.navbar}>
       <Link to={"/"} className={styles.contenedorLogo}>
         <img src="LogoMiUniverso2.jpg" alt="" />
@@ -14,35 +15,35 @@ const Navbar = () => {
         </div>
       </Link>
       <ul>
-        <Link to={`/`}>
-          <Typography variant="h6" color="primary.main" fontWeight="400">
-            Todas
-          </Typography>
-        </Link>
-        <Link to={`/category/velas`}>
-          <Typography variant="h6" color="primary.main" fontWeight="400">
-            Velas
-          </Typography>
-        </Link>
-        <Link to={`/category/mates`}>
-          <Typography variant="h6" color="primary.main" fontWeight="400">
-            Mates
-          </Typography>
-        </Link>
-        <Link to={`/category/tarot`}>
-          <Typography variant="h6" color="primary.main" fontWeight="400">
-            Tarot
-          </Typography>
-        </Link>
-        <Link to={`/category/astrologia`}>
-          <Typography variant="h6" color="primary.main" fontWeight="400">
-            Astrología
-          </Typography>
-        </Link>
+        {categories.length > 0 &&
+          categories.map((category) => {
+            return (
+              <Link key={category?.id} to={category?.path}>
+                <Typography variant="h6" color="primary.main" fontWeight="400">
+                  {category?.name}
+                </Typography>
+              </Link>
+            );
+          })}
       </ul>
-      <Link to={"/cart"} className={styles.cartWidget}>
-        <CartWidget />
-      </Link>
+      {total > 0 ? (
+        <Link to={"/cart"} className={styles.cartWidget}>
+          <CartWidget />
+        </Link>
+      ) : (
+        <div></div>
+      )}
+    </div>
+  ) : (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        height: "90vh",
+        alignItems: "center",
+      }}
+    >
+      <MoonLoader color="#d0a9a2" />
     </div>
   );
 };
