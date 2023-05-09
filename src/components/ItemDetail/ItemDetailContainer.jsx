@@ -1,12 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import ItemDetail from "./ItemDetail";
 import { useNavigate, useParams } from "react-router-dom";
-import { products } from "../../products-Mock";
 import useCounter from "../../utils/hooks/UseCounter";
 import { CartContext } from "../../context/CartContext";
+import { getDoc, collection, doc } from "firebase/firestore";
+import { db } from "../../firebaseConfig";
+
 
 const ItemDetailContainer = () => {
-  const { addToCart, getQuantityById, getTotalQuantityCart } = useContext(CartContext);
+  const { addToCart, getQuantityById, getTotalQuantityCart } =
+    useContext(CartContext);
   const [product, setProduct] = useState({});
   let totalQuantity = getQuantityById(product.id);
   const { counter, increment, decrement } = useCounter(totalQuantity);
@@ -14,10 +17,11 @@ const ItemDetailContainer = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    let encontrado = products.find((prod) => prod.id === +id);
-    setTimeout(() => {
-      setProduct(encontrado);
-    }, 500);
+    const productColl = collection(db, "products");
+    const refDoc = doc(productColl, id);
+    getDoc(refDoc)
+      .then((res) => setProduct({ ...res.data(), id: res.id }))
+      .catch((err) => console.log(err));
   }, [id]);
 
   const onAdd = (product) => {
@@ -25,6 +29,7 @@ const ItemDetailContainer = () => {
     addToCart(newProduct);
   };
 
+ 
   return (
     <div>
       <ItemDetail

@@ -2,6 +2,7 @@ import { Box, Button, Typography } from "@mui/material";
 import React from "react";
 import Counter from "./Counter";
 import styles from "./ItemDetail.module.css";
+import Loader from "../Loader/Loader";
 
 const ItemDetail = ({
   product,
@@ -12,6 +13,10 @@ const ItemDetail = ({
   getTotalQuantityCart,
   navigate,
 }) => {
+  if (!product.img) {
+    return <Loader />;
+  }
+
   return (
     <Box padding={"70px 7.5% 0 7.5%"} marginBottom={7}>
       <Box

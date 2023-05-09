@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import CartWidget from "../CartWidget/CartWidget";
 import styles from "./Navbar.module.css";
 import { Typography } from "@mui/material";
-import { MoonLoader } from "react-spinners";
+import Loader from "../Loader/Loader";
 
 const Navbar = ({ total, categories }) => {
   return categories.length > 0 ? (
@@ -35,16 +35,7 @@ const Navbar = ({ total, categories }) => {
       )}
     </div>
   ) : (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        height: "90vh",
-        alignItems: "center",
-      }}
-    >
-      <MoonLoader color="#d0a9a2" />
-    </div>
+    <Loader />
   );
 };
 
