@@ -1,5 +1,4 @@
 import ItemList from "./ItemList";
-import { products } from "../../products-Mock";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getDocs, collection, query, where } from "firebase/firestore";
