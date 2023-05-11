@@ -7,6 +7,7 @@ import AlertToastify from "./utils/alerts/AlertToastify";
 import CartContextProvider from "./context/CartContext";
 import CartContainer from "./components/Cart/CartContainer";
 import YesNoModal from "./utils/modals/YesNoModal/YesNoModal";
+import CheckoutFormContainer from "./components/CheckoutForm/CheckoutFormContainer";
 
 const theme = createTheme({
   typography: {
@@ -24,7 +25,6 @@ const theme = createTheme({
 });
 
 function App() {
-
   return (
     <ThemeProvider theme={theme}>
       <div>
@@ -42,6 +42,10 @@ function App() {
                   element={<ItemDetailContainer />}
                 />
                 <Route path="/cart" element={<CartContainer />} />
+                <Route
+                  path="/checkoutform"
+                  element={<CheckoutFormContainer />}
+                />
               </Route>
 
               {/* Ruta para páginas nos encontradas */}
