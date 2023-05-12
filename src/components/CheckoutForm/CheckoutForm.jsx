@@ -12,13 +12,7 @@ import {
 import AddBusinessRoundedIcon from "@mui/icons-material/AddBusinessRounded";
 import LocalShippingRoundedIcon from "@mui/icons-material/LocalShippingRounded";
 
-const CheckoutForm = ({
-  formaEnvio,
-  handleChange,
-  handleSubmit,
-  errors,
-  alternarEnvio,
-}) => {
+const CheckoutForm = ({ handleChange, handleSubmit, errors, values }) => {
   return (
     <div style={{ padding: "70px 7.5% 0 7.5%" }}>
       <Typography variant="h3" color="secondary.dark" fontWeight={600}>
@@ -49,31 +43,7 @@ const CheckoutForm = ({
             flex
             justifyContent={"lefth"}
           >
-            <Grid item xs={11} sm={8} lg={12}>
-              <TextField
-                id="emailComprador"
-                label="Email"
-                variant="outlined"
-                fullWidth
-                name="emailComprador"
-                onChange={handleChange}
-                error={errors.emailComprador && true}
-                helperText={errors.emailComprador}
-              />
-            </Grid>
-            <Grid padding={"auto"} item xs={11} sm={4} lg={2}>
-              <TextField
-                id="dniComprador"
-                label="DNI"
-                variant="outlined"
-                fullWidth
-                name="dniComprador"
-                onChange={handleChange}
-                error={errors.dniComprador && true}
-                helperText={errors.dniComprador}
-              />
-            </Grid>
-            <Grid item xs={11} sm={6} lg={5}>
+            <Grid item xs={11} sm={6} lg={6}>
               <TextField
                 id="nombreComprador"
                 label="Nombre"
@@ -85,7 +55,7 @@ const CheckoutForm = ({
                 helperText={errors.nombreComprador}
               />
             </Grid>
-            <Grid item xs={11} sm={6} lg={5}>
+            <Grid item xs={11} sm={6} lg={6}>
               <TextField
                 id="apellidoComprador"
                 label="Apellido"
@@ -95,6 +65,43 @@ const CheckoutForm = ({
                 onChange={handleChange}
                 error={errors.apellidoComprador && true}
                 helperText={errors.apellidoComprador}
+              />
+            </Grid>
+            <Grid padding={"auto"} item xs={11} sm={3} lg={2}>
+              <TextField
+                id="dniComprador"
+                label="DNI"
+                variant="outlined"
+                fullWidth
+                name="dniComprador"
+                onChange={handleChange}
+                error={errors.dniComprador && true}
+                helperText={errors.dniComprador}
+              />
+            </Grid>
+            <Grid padding={"auto"} item xs={11} sm={3} lg={2}>
+              <TextField
+                id="celComprador"
+                label="Celular"
+                variant="outlined"
+                placeholder="Sin 0 y sin 15"
+                fullWidth
+                name="celComprador"
+                onChange={handleChange}
+                error={errors.celComprador && true}
+                helperText={errors.celComprador}
+              />
+            </Grid>
+            <Grid item xs={11} sm={6} lg={8}>
+              <TextField
+                id="emailComprador"
+                label="Email"
+                variant="outlined"
+                fullWidth
+                name="emailComprador"
+                onChange={handleChange}
+                error={errors.emailComprador && true}
+                helperText={errors.emailComprador}
               />
             </Grid>
             <Grid item xs={11} sm={6} lg={5}>
@@ -181,11 +188,10 @@ const CheckoutForm = ({
         </Typography>
         <div style={{ padding: "1rem 2rem" }}>
           <FormControl>
-            <RadioGroup defaultValue={formaEnvio}>
+            <RadioGroup defaultValue={"EAD"}>
               <div style={{ display: "flex", gap: "10px" }}>
                 <Button variant="outlined">
                   <FormControlLabel
-                    onClick={alternarEnvio}
                     name="formaEnvio"
                     onChange={handleChange}
                     value="EAD"
@@ -206,7 +212,6 @@ const CheckoutForm = ({
                 </Button>
                 <Button variant="outlined">
                   <FormControlLabel
-                    onClick={alternarEnvio}
                     name="formaEnvio"
                     onChange={handleChange}
                     value="REL"
@@ -228,7 +233,7 @@ const CheckoutForm = ({
               </div>
             </RadioGroup>
           </FormControl>
-          {formaEnvio === "EAD" && (
+          {values.formaEnvio === "EAD" && (
             <div style={{ marginTop: "1rem" }}>
               <Typography variant="h5" color="primary" fontWeight={400}>
                 Completá los datos para el envío:
@@ -237,7 +242,7 @@ const CheckoutForm = ({
                 name="envioInfoComprador"
                 onChange={handleChange}
                 control={<Checkbox />}
-                label="Misma direccion que datos personales"
+                label="Tomar la misma direccion que complté en datos personales"
               />
               <Grid
                 container
@@ -254,6 +259,14 @@ const CheckoutForm = ({
                     fullWidth
                     name="calleEntrega"
                     onChange={handleChange}
+                    error={errors.calleEntrega && true}
+                    helperText={errors.calleEntrega}
+                    disabled={values.envioInfoComprador && true}
+                    value={
+                      values.envioInfoComprador
+                        ? values.calleComprador
+                        : values.calleEntrega
+                    }
                   />
                 </Grid>
                 <Grid item xs={11} sm={2} lg={1}>
@@ -264,6 +277,14 @@ const CheckoutForm = ({
                     fullWidth
                     name="alturaEntrega"
                     onChange={handleChange}
+                    error={errors.alturaEntrega && true}
+                    helperText={errors.alturaEntrega}
+                    disabled={values.envioInfoComprador && true}
+                    value={
+                      values.envioInfoComprador
+                        ? values.alturaComprador
+                        : values.alturaEntrega
+                    }
                   />
                 </Grid>
                 <Grid item xs={11} sm={2} lg={1}>
@@ -274,6 +295,14 @@ const CheckoutForm = ({
                     fullWidth
                     name="pisoEntrega"
                     onChange={handleChange}
+                    error={errors.pisoEntrega && true}
+                    helperText={errors.pisoEntrega}
+                    disabled={values.envioInfoComprador && true}
+                    value={
+                      values.envioInfoComprador
+                        ? values.pisoComprador
+                        : values.pisoEntrega
+                    }
                   />
                 </Grid>
                 <Grid item xs={11} sm={2} lg={1}>
@@ -284,6 +313,14 @@ const CheckoutForm = ({
                     fullWidth
                     name="deptoEntrega"
                     onChange={handleChange}
+                    error={errors.deptoEntrega && true}
+                    helperText={errors.deptoEntrega}
+                    disabled={values.envioInfoComprador && true}
+                    value={
+                      values.envioInfoComprador
+                        ? values.deptoComprador
+                        : values.deptoEntrega
+                    }
                   />
                 </Grid>
                 <Grid item xs={11} sm={6} lg={2}>
@@ -294,6 +331,14 @@ const CheckoutForm = ({
                     fullWidth
                     name="ciudadEntrega"
                     onChange={handleChange}
+                    error={errors.ciudadEntrega && true}
+                    helperText={errors.ciudadEntrega}
+                    disabled={values.envioInfoComprador && true}
+                    value={
+                      values.envioInfoComprador
+                        ? values.ciudadComprador
+                        : values.ciudadEntrega
+                    }
                   />
                 </Grid>
                 <Grid item xs={11} sm={6} lg={2}>
@@ -304,6 +349,14 @@ const CheckoutForm = ({
                     fullWidth
                     name="provinciaEntrega"
                     onChange={handleChange}
+                    error={errors.provinciaEntrega && true}
+                    helperText={errors.provinciaEntrega}
+                    disabled={values.envioInfoComprador && true}
+                    value={
+                      values.envioInfoComprador
+                        ? values.provinciaComprador
+                        : values.provinciaEntrega
+                    }
                   />
                 </Grid>
               </Grid>
