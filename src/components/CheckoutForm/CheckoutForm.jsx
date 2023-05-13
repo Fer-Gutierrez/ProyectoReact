@@ -1,7 +1,4 @@
-import {
-  Button,
-  Typography,
-} from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import DeliveryForm from "./DeliveryForm";
 import CustomerForm from "./CustomerForm";
 import CartItem from "../Cart/CartItem";
@@ -18,7 +15,6 @@ const CheckoutForm = ({
   totalPrice,
   totalProducts,
 }) => {
-  console.log(totalPrice);
   return (
     <div style={{ padding: "70px 7.5% 0 7.5%" }}>
       <Typography variant="h3" color="secondary.dark" fontWeight={600}>

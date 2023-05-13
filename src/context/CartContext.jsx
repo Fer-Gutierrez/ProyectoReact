@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import UseAlert from "../utils/alerts/UseAlert";
 import { mostrarYesNoModal } from "../utils/modals/YesNoModal/YesNoModal";
 
@@ -7,6 +7,15 @@ export const CartContext = createContext();
 const CartContextProvider = ({ children }) => {
   const { alertInfo, alertSucces } = UseAlert();
   const [cart, setCart] = useState([]);
+
+  const guardarLocalStorage = (cart) => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  };
+
+  useEffect(() => {
+    let localCart = JSON.parse(localStorage.getItem("cart"));
+    localCart && setCart(localCart);
+  }, []);
 
   const isInCart = (id) => {
     let existe = cart.some((prod) => prod?.id === id);
@@ -22,9 +31,11 @@ const CartContextProvider = ({ children }) => {
           : item;
       });
       setCart(newCart);
+      guardarLocalStorage(newCart);
       alertSucces("Se actualizó el producto en tu carrito.");
     } else {
       setCart([...cart, product]);
+      guardarLocalStorage([...cart, product]);
       alertSucces("Se agregó el producto en tu carrito.");
     }
   };
@@ -49,6 +60,7 @@ const CartContextProvider = ({ children }) => {
       "¿Esta seguro que desea limpiar el carrito?",
       () => {
         setCart([]);
+        guardarLocalStorage([]);
         alertInfo("Carrito eliminado");
       },
       () => {}
@@ -64,6 +76,7 @@ const CartContextProvider = ({ children }) => {
         () => {
           let newCart = cart.filter((prod) => prod.id !== id);
           setCart(newCart);
+          guardarLocalStorage(newCart);
           alertInfo("Producto eliminado del carrito");
         },
         () => {}
