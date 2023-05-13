@@ -57,7 +57,7 @@ const ItemDetail = ({
             {product.description}
           </Typography>
           <Typography variant="h4" color="primary.dark" marginTop={"10px"}>
-            $
+            ${" "}
             {Number(product.price).toLocaleString("es-AR", {
               minimumFractionDigits: 2,
             })}

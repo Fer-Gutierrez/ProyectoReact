@@ -33,33 +33,49 @@ const Cart = ({
               minimumFractionDigits: 2,
             })}
           </h1>
-          <h1>Estas llevando {totalQuantity} productos</h1>
+          <h1>
+            {totalQuantity > 1
+              ? `Estas llevando ${totalQuantity} productos`
+              : `Estas llevando ${totalQuantity} producto.`}
+          </h1>
           <Box>
-          <Button
-            onClick={deleteCart}
-            variant="contained"
-            color="secondary"
-            style={{
-              margin: "10px auto 0 10px",
-              padding: "10px",
-              fontSize: 14,
-            }}
-          >
-            Borrar Carrito
-          </Button>
-          <Button
-            onClick={() => navigate("/")}
-            variant="contained"
-            color="secondary"
-            style={{
-              margin: "10px auto 0 10px",
-              padding: "10px",
-              fontSize: 14,
-            }}
-          >
-            Agregar mas productos
-          </Button>
+            <Button
+              onClick={deleteCart}
+              variant="contained"
+              color="secondary"
+              style={{
+                margin: "10px auto 0 10px",
+                padding: "10px",
+                fontSize: 14,
+              }}
+            >
+              Borrar Carrito
+            </Button>
+            <Button
+              onClick={() => navigate("/")}
+              variant="contained"
+              color="secondary"
+              style={{
+                margin: "10px auto 0 10px",
+                padding: "10px",
+                fontSize: 14,
+              }}
+            >
+              Agregar mas productos
+            </Button>
           </Box>
+          <Button
+            onClick={() => navigate("/checkoutform")}
+            variant="contained"
+            style={{
+              backgroundColor: "#30963d",
+              margin: "20px 0",
+              padding: "10px",
+              fontSize: 14,
+            }}
+          >
+            Ir a Pagar
+          </Button>
         </div>
       ) : (
         <div

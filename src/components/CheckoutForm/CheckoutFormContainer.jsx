@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import CheckoutForm from "./CheckoutForm";
 import { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import UseAlert from "../../utils/alerts/UseAlert";
+import { CartContext } from "../../context/CartContext";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutFormContainer = () => {
   const [onChangeValidation, setOnChangeValidation] = useState(false);
+  const { alertError } = UseAlert();
+  const { cart, deleteCartItem, getTotalPriceCart, getTotalQuantityCart } =
+    useContext(CartContext);
+  const navigate = useNavigate();
 
   const { handleSubmit, handleChange, errors, isValid, values } = useFormik({
     initialValues: {
@@ -28,6 +35,7 @@ const CheckoutFormContainer = () => {
       deptoEntrega: "",
       ciudadEntrega: "",
       provinciaEntrega: "",
+      observacionesEntrega: "",
     },
     onSubmit: (data) => {
       console.log(data);
@@ -69,38 +77,47 @@ const CheckoutFormContainer = () => {
         .required("Este campo es requerido"),
       formaEnvio: Yup.string().required(),
       envioInfoComprador: Yup.boolean(),
-      calleEntrega: Yup.string().when("formaEnvio", {
-        is: (formaEnvio) => formaEnvio === "EAD",
+      calleEntrega: Yup.string().when(["formaEnvio", "envioInfoComprador"], {
+        is: (formaEnvio, envioInfoComprador) =>
+          formaEnvio === "EAD" && !envioInfoComprador,
         then: (schema) =>
           schema
             .required("Este campo es requerido")
             .max(50, "No debe superar 50 caracteres"),
       }),
       alturaEntrega: Yup.number("El campo debe ser numérico").when(
-        "formaEnvio",
+        ["formaEnvio", "envioInfoComprador"],
         {
-          is: (formaEnvio) => formaEnvio === "EAD",
+          is: (formaEnvio, envioInfoComprador) =>
+            formaEnvio === "EAD" && !envioInfoComprador,
           then: (schema) => schema.required("Este campo es requerido"),
         }
       ),
       pisoEntrega: Yup.number().optional().nullable(),
       deptoEntrega: Yup.string().nullable(),
-      ciudadEntrega: Yup.string().when("formaEnvio", {
-        is: (formaEnvio) => formaEnvio === "EAD",
+      ciudadEntrega: Yup.string().when(["formaEnvio", "envioInfoComprador"], {
+        is: (formaEnvio, envioInfoComprador) =>
+          formaEnvio === "EAD" && !envioInfoComprador,
         then: (schema) =>
           schema
             .required("Este campo es requerido")
             .max(50, "No debe superar 50 caracteres"),
       }),
-      provinciaEntrega: Yup.string().when("formaEnvio", {
-        is: (formaEnvio) => formaEnvio === "EAD",
-        then: (schema) =>
-          schema
-            .required("Este campo es requerido")
-            .max(50, "No debe superar 50 caracteres"),
-      }),
+      provinciaEntrega: Yup.string().when(
+        ["formaEnvio", "envioInfoComprador"],
+        {
+          is: (formaEnvio, envioInfoComprador) =>
+            formaEnvio === "EAD" && !envioInfoComprador,
+          then: (schema) =>
+            schema
+              .required("Este campo es requerido")
+              .max(50, "No debe superar 50 caracteres"),
+        }
+      ),
+      observacionesEntrega: Yup.string()
+        .max(200, "Solo se permiten hasta 200 caracteres.")
+        .notRequired(),
     }),
-
     validateOnChange: onChangeValidation,
   });
 
@@ -109,6 +126,23 @@ const CheckoutFormContainer = () => {
     setOnChangeValidation(!isValid);
   }, [isValid]);
 
+  //Segundo Alert cuando intentamos Finalizar la compra con campos incompletos:
+  const verificarCamposFaltantes = () => {
+    let totalErrors = Object.entries(errors).length;
+    totalErrors > 0 &&
+      alertError(`Falta completar ${totalErrors} campos requeridos`);
+  };
+
+  //Primer alert cuando intentamos Finalizar la compra con campos incompletos:
+  useEffect(() => {
+    if (Object.entries(errors).length > 0 && !onChangeValidation) {
+      alertError("Debe completar los campos requeridos");
+    }
+  }, [errors]);
+
+  let totalPrice = getTotalPriceCart();
+  let totalProducts = getTotalQuantityCart();
+
   return (
     <div>
       <CheckoutForm
@@ -116,6 +150,12 @@ const CheckoutFormContainer = () => {
         handleChange={handleChange}
         errors={errors}
         values={values}
+        verificarCamposFaltantes={verificarCamposFaltantes}
+        cart={cart}
+        navigate={navigate}
+        deleteCartItem={deleteCartItem}
+        totalPrice={totalPrice}
+        totalProducts={totalProducts}
       />
     </div>
   );
