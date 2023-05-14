@@ -22,6 +22,7 @@ const CustomerForm = ({ handleChange, errors }) => {
         <Grid item xs={11} sm={6} lg={6}>
           <TextField
             id="nombreComprador"
+            color="secondary"
             label="Nombre"
             variant="outlined"
             fullWidth
@@ -34,6 +35,7 @@ const CustomerForm = ({ handleChange, errors }) => {
         <Grid item xs={11} sm={6} lg={6}>
           <TextField
             id="apellidoComprador"
+            color="secondary"
             label="Apellido"
             variant="outlined"
             fullWidth
@@ -46,6 +48,7 @@ const CustomerForm = ({ handleChange, errors }) => {
         <Grid padding={"auto"} item xs={11} sm={3} lg={2}>
           <TextField
             id="dniComprador"
+            color="secondary"
             label="DNI"
             variant="outlined"
             fullWidth
@@ -58,6 +61,7 @@ const CustomerForm = ({ handleChange, errors }) => {
         <Grid padding={"auto"} item xs={11} sm={3} lg={2}>
           <TextField
             id="celComprador"
+            color="secondary"
             label="Celular"
             variant="outlined"
             placeholder="Sin 0 y sin 15"
@@ -71,6 +75,7 @@ const CustomerForm = ({ handleChange, errors }) => {
         <Grid item xs={11} sm={6} lg={8}>
           <TextField
             id="emailComprador"
+            color="secondary"
             label="Email"
             variant="outlined"
             fullWidth
@@ -83,6 +88,7 @@ const CustomerForm = ({ handleChange, errors }) => {
         <Grid item xs={11} sm={6} lg={5}>
           <TextField
             id="calleComprador"
+            color="secondary"
             label="Calle"
             variant="outlined"
             fullWidth
@@ -96,6 +102,7 @@ const CustomerForm = ({ handleChange, errors }) => {
           <TextField
             id="alturaComprador"
             label="Altura"
+            color="secondary"
             variant="outlined"
             fullWidth
             name="alturaComprador"
@@ -107,6 +114,7 @@ const CustomerForm = ({ handleChange, errors }) => {
         <Grid item xs={11} sm={2} lg={1}>
           <TextField
             id="pisoComprador"
+            color="secondary"
             label="Piso"
             variant="outlined"
             fullWidth
@@ -119,6 +127,7 @@ const CustomerForm = ({ handleChange, errors }) => {
         <Grid item xs={11} sm={2} lg={1}>
           <TextField
             id="deptoComprador"
+            color="secondary"
             label="Dpto"
             variant="outlined"
             fullWidth
@@ -132,6 +141,7 @@ const CustomerForm = ({ handleChange, errors }) => {
           <TextField
             id="ciudadComprador"
             label="Ciudad"
+            color="secondary"
             variant="outlined"
             fullWidth
             name="ciudadComprador"
@@ -143,6 +153,7 @@ const CustomerForm = ({ handleChange, errors }) => {
         <Grid item xs={11} sm={6} lg={2}>
           <TextField
             id="provinciaComprador"
+            color="secondary"
             label="Provincia"
             variant="outlined"
             fullWidth

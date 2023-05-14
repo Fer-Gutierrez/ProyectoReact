@@ -91,6 +91,7 @@ const DeliveryForm = ({ handleChange, errors, values }) => {
               <TextField
                 id="calleEntrega"
                 label="Calle"
+                color="secondary"
                 variant="outlined"
                 fullWidth
                 name="calleEntrega"
@@ -111,6 +112,7 @@ const DeliveryForm = ({ handleChange, errors, values }) => {
               <TextField
                 id="alturaEntrega"
                 label="Altura"
+                color="secondary"
                 variant="outlined"
                 fullWidth
                 name="alturaEntrega"
@@ -131,6 +133,7 @@ const DeliveryForm = ({ handleChange, errors, values }) => {
               <TextField
                 id="pisoEntrega"
                 label="Piso"
+                color="secondary"
                 variant="outlined"
                 fullWidth
                 name="pisoEntrega"
@@ -149,6 +152,7 @@ const DeliveryForm = ({ handleChange, errors, values }) => {
               <TextField
                 id="deptoEntrega"
                 label="Dpto"
+                color="secondary"
                 variant="outlined"
                 fullWidth
                 name="deptoEntrega"
@@ -169,6 +173,7 @@ const DeliveryForm = ({ handleChange, errors, values }) => {
               <TextField
                 id="ciudadEntrega"
                 label="Ciudad"
+                color="secondary"
                 variant="outlined"
                 fullWidth
                 name="ciudadEntrega"
@@ -189,6 +194,7 @@ const DeliveryForm = ({ handleChange, errors, values }) => {
               <TextField
                 id="provinciaEntrega"
                 label="Provincia"
+                color="secondary"
                 variant="outlined"
                 fullWidth
                 name="provinciaEntrega"
@@ -210,6 +216,7 @@ const DeliveryForm = ({ handleChange, errors, values }) => {
             <Grid item xs={11} sm={11} lg={11}>
               <TextField
                 id="observacionesEntrega"
+                color="secondary"
                 label="Observaciones para la entrega"
                 variant="outlined"
                 fullWidth

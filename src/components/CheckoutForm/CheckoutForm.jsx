@@ -16,7 +16,6 @@ const CheckoutForm = ({
   totalPrice,
   totalQuantity,
 }) => {
-
   return (
     <div style={{ padding: "70px 7.5% 0 7.5%" }}>
       <Typography variant="h3" color="secondary.dark" fontWeight={600}>
