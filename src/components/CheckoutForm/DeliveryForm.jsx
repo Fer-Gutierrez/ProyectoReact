@@ -210,7 +210,7 @@ const DeliveryForm = ({ handleChange, errors, values }) => {
             <Grid item xs={11} sm={11} lg={11}>
               <TextField
                 id="observacionesEntrega"
-                label="Observaciones"
+                label="Observaciones para la entrega"
                 variant="outlined"
                 fullWidth
                 name="observacionesEntrega"

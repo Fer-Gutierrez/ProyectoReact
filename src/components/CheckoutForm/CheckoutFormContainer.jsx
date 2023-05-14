@@ -14,11 +14,12 @@ import {
   serverTimestamp,
   updateDoc,
 } from "firebase/firestore";
+import FinishOrder from "./FinishOrder";
 
 const CheckoutFormContainer = () => {
   const [onChangeValidation, setOnChangeValidation] = useState(false);
   const [orderId, setOrderId] = useState(null);
-  const { alertError } = UseAlert();
+  const { alertError, alertInfo } = UseAlert();
   const {
     cart,
     deleteCartItem,
@@ -234,11 +235,9 @@ const CheckoutFormContainer = () => {
   return (
     <div>
       {orderId ? (
-        <div style={{ paddingTop: "70px" }}>
-          <h1>Gracias por su compra, su numero de orden es:</h1>
-          <h1>{orderId}</h1>
-        </div>
+        <FinishOrder orderId={orderId} alertInfo={alertInfo} navigate={navigate} />
       ) : (
+        
         <CheckoutForm
           handleSubmit={handleSubmit}
           handleChange={handleChange}

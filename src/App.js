@@ -8,6 +8,7 @@ import CartContextProvider from "./context/CartContext";
 import CartContainer from "./components/Cart/CartContainer";
 import YesNoModal from "./utils/modals/YesNoModal/YesNoModal";
 import CheckoutFormContainer from "./components/CheckoutForm/CheckoutFormContainer";
+import FinishOrder from "./components/CheckoutForm/FinishOrder";
 
 const theme = createTheme({
   typography: {
@@ -46,6 +47,10 @@ function App() {
                   path="/checkoutform"
                   element={<CheckoutFormContainer />}
                 />
+                {/* <Route
+                  path="/finishorder"
+                  element={<FinishOrder orderId={"asfjahsflaksfh"} />}
+                /> */}
               </Route>
 
               {/* Ruta para páginas nos encontradas */}

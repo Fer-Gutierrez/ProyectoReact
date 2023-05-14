@@ -1,7 +1,8 @@
-import { Button, Typography } from "@mui/material";
+import { Button, TextField, Typography } from "@mui/material";
 import DeliveryForm from "./DeliveryForm";
 import CustomerForm from "./CustomerForm";
 import CartItem from "../Cart/CartItem";
+import styled from "@emotion/styled";
 
 const CheckoutForm = ({
   handleChange,
@@ -15,6 +16,7 @@ const CheckoutForm = ({
   totalPrice,
   totalQuantity,
 }) => {
+
   return (
     <div style={{ padding: "70px 7.5% 0 7.5%" }}>
       <Typography variant="h3" color="secondary.dark" fontWeight={600}>
@@ -41,7 +43,10 @@ const CheckoutForm = ({
             </Typography>
           </div>
           <form action="" onSubmit={handleSubmit}>
-            <CustomerForm handleChange={handleChange} errors={errors} />
+            <CustomerForm
+              handleChange={handleChange}
+              errors={errors}
+            />
             <DeliveryForm
               handleChange={handleChange}
               errors={errors}
