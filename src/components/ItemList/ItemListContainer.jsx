@@ -1,26 +1,15 @@
 import ItemList from "./ItemList";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { getDocs, collection, query, where } from "firebase/firestore";
 import { db } from "../../firebaseConfig";
+import { CartContext } from "../../context/CartContext";
 
 const ItemListContainer = () => {
   const [items, setItems] = useState([]);
   const { categoryName } = useParams();
-
-  // useEffect(() => {
-  //   //**Simulamos consulta a backend**
-  //   const APIProductos = new Promise((resolve, reject) => {
-  //     setTimeout(() => {
-  //       const productsFiltered = products.filter(
-  //         prod => prod.category.toLowerCase() === categoryName?.toLowerCase()
-  //       );
-  //       resolve(categoryName ? productsFiltered : products);
-  //     }, 500);
-  //   });
-
-  //   APIProductos.then(res => setItems(res)).catch(err => console.log(err));
-  // }, [categoryName]);
+  const navigate = useNavigate();
+  const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
     const productColl = collection(db, "products");
@@ -47,6 +36,8 @@ const ItemListContainer = () => {
   return (
     <>
       <ItemList
+        addToCart={addToCart}
+        navigate={navigate}
         items={items}
         category={categoryName || "Todos los productos y servicios"}
       />

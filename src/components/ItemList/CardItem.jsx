@@ -8,11 +8,10 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-
 import styles from "./CardItem.module.css";
 import { Link } from "react-router-dom";
 
-const CardItem = ({ item }) => {
+const CardItem = ({ item, navigate, addToCart }) => {
   return (
     <Card>
       <CardActionArea>
@@ -57,11 +56,23 @@ const CardItem = ({ item }) => {
         </Link>
       </CardActionArea>
       <CardActions className={styles.MuiCardActions}>
-        <Tooltip title="Agregar al carrito">
-          <Button className={styles.btnAgregarCarrito}>
+        <Tooltip title="Agregar 1 al carrito">
+          <Button
+            onClick={() => addToCart({...item, quantity: 1})}
+            className={styles.btnAgregarCarrito}
+          >
             <i className={"bi bi-bag-plus-fill"}></i>
           </Button>
         </Tooltip>
+        <Tooltip title="Entrar a la ficha del producto">
+        <Button
+          onClick={() => navigate(`/itemDetail/${item.id}`)}
+          variant="contained"
+          className={styles.btnAgregarCarrito}
+          >
+          Ver mas
+        </Button>
+          </Tooltip>
       </CardActions>
     </Card>
   );

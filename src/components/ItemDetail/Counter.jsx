@@ -17,7 +17,7 @@ const Counter = ({ product, counter, increment, decrement }) => {
         color="secondary"
         onClick={decrement}
       >
-        <i class="bi bi-dash-circle"></i>
+        <i className="bi bi-dash-circle"></i>
       </Button>
       <Typography
         borderRadius={"5px"}
@@ -45,7 +45,7 @@ const Counter = ({ product, counter, increment, decrement }) => {
         color="secondary"
         onClick={() => increment(product.stock)}
       >
-        <i class="bi bi-plus-circle"></i>
+        <i className="bi bi-plus-circle"></i>
       </Button>
     </Box>
   );
