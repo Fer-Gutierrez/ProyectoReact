@@ -54,17 +54,22 @@ const CartContextProvider = ({ children }) => {
     return total;
   };
 
-  const deleteCart = () => {
-    mostrarYesNoModal(
-      "Borrar Carrito",
-      "¿Esta seguro que desea limpiar el carrito?",
-      () => {
-        setCart([]);
-        guardarLocalStorage([]);
-        alertInfo("Carrito eliminado");
-      },
-      () => {}
-    );
+  const deleteCart = (directDelete = false) => {
+    if (directDelete) {
+      setCart([]);
+      guardarLocalStorage([]);
+    } else {
+      mostrarYesNoModal(
+        "Borrar Carrito",
+        "¿Esta seguro que desea limpiar el carrito?",
+        () => {
+          setCart([]);
+          guardarLocalStorage([]);
+          alertInfo("Carrito eliminado");
+        },
+        () => {}
+      );
+    }
   };
 
   const deleteCartItem = (id) => {

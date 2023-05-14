@@ -13,7 +13,7 @@ const CheckoutForm = ({
   navigate,
   deleteCartItem,
   totalPrice,
-  totalProducts,
+  totalQuantity,
 }) => {
   return (
     <div style={{ padding: "70px 7.5% 0 7.5%" }}>
@@ -35,9 +35,9 @@ const CheckoutForm = ({
               })}
             </Typography>
             <Typography variant="h4" color="primary" fontWeight={800}>
-              {totalProducts > 1
-                ? `Estas llevando ${totalProducts} productos.`
-                : `Estas llevando ${totalProducts} producto.`}
+              {totalQuantity > 1
+                ? `Estas llevando ${totalQuantity} productos.`
+                : `Estas llevando ${totalQuantity} producto.`}
             </Typography>
           </div>
           <form action="" onSubmit={handleSubmit}>

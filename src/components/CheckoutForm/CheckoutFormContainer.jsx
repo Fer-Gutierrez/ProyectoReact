@@ -6,13 +6,103 @@ import * as Yup from "yup";
 import UseAlert from "../../utils/alerts/UseAlert";
 import { CartContext } from "../../context/CartContext";
 import { useNavigate } from "react-router-dom";
+import { db } from "../../firebaseConfig";
+import {
+  addDoc,
+  collection,
+  doc,
+  serverTimestamp,
+  updateDoc,
+} from "firebase/firestore";
 
 const CheckoutFormContainer = () => {
   const [onChangeValidation, setOnChangeValidation] = useState(false);
+  const [orderId, setOrderId] = useState(null);
   const { alertError } = UseAlert();
-  const { cart, deleteCartItem, getTotalPriceCart, getTotalQuantityCart } =
-    useContext(CartContext);
+  const {
+    cart,
+    deleteCartItem,
+    getTotalPriceCart,
+    getTotalQuantityCart,
+    deleteCart,
+  } = useContext(CartContext);
   const navigate = useNavigate();
+
+  let totalPrice = getTotalPriceCart();
+  let totalQuantity = getTotalQuantityCart();
+
+  const saveOrder = (data) => {
+    let withDelivery = data?.formaEnvio === "EAD" && true;
+
+    let InfoDelivery = null;
+    if (data?.formaEnvio === "EAD") {
+      if (data?.envioInfoComprador) {
+        InfoDelivery = {
+          calleEntrega: data?.calleComprador,
+          alturaEntrega: data?.alturaComprador,
+          pisoEntrega: data?.pisoComprador,
+          deptoEntrega: data?.deptoComprador,
+          ciudadEntrega: data?.ciudadComprador,
+          provinciaEntrega: data?.provinciaComprador,
+          observacionesEntrega: data?.observacionesEntrega,
+        };
+      } else {
+        InfoDelivery = {
+          calleEntrega: data?.calleEntrega,
+          alturaEntrega: data?.alturaEntrega,
+          pisoEntrega: data?.pisoEntrega,
+          deptoEntrega: data?.deptoEntrega,
+          ciudadEntrega: data?.ciudadEntrega,
+          provinciaEntrega: data?.provinciaEntrega,
+          observacionesEntrega: data?.observacionesEntrega,
+        };
+      }
+    }
+
+    const dataOrder = {
+      buyer: {
+        nombre: data?.nombreComprador,
+        apellido: data?.apellidoComprador,
+        dni: data?.dniComprador,
+        email: data?.emailComprador,
+        celular: data?.celComprador,
+        calle: data?.calleComprador,
+        altura: data?.alturaComprador,
+        piso: data?.pisoComprador,
+        depto: data?.deptoComprador,
+        ciudad: data?.ciudadComprador,
+        provincia: data?.provinciaComprador,
+      },
+      items: cart,
+      totalPrice,
+      totalQuantity,
+      withDelivery,
+      InfoDelivery,
+      date: serverTimestamp(),
+    };
+
+    const ordersColl = collection(db, "orders");
+    addDoc(ordersColl, dataOrder)
+      .then((res) => {
+        setOrderId(res.id);
+        editSoldProducts(dataOrder.items);
+        deleteCart(true);
+      })
+      .catch((err) => {
+        console.log(err);
+        alertError("Error: La venta no pudo ser procesada.");
+      });
+  };
+
+  const editSoldProducts = (soldProducts) => {
+    soldProducts.length > 0 &&
+      soldProducts.map((p) => {
+        if (p.reqStock) {
+          let product = doc(db, "products", p.id);
+          updateDoc(product, { stock: p.stock - p.quantity });
+        }
+      });
+  };
 
   const { handleSubmit, handleChange, errors, isValid, values } = useFormik({
     initialValues: {
@@ -37,9 +127,9 @@ const CheckoutFormContainer = () => {
       provinciaEntrega: "",
       observacionesEntrega: "",
     },
-    onSubmit: (data) => {
-      console.log(data);
-    },
+
+    onSubmit: saveOrder,
+
     validationSchema: Yup.object().shape({
       emailComprador: Yup.string()
         .email("Debe ser un email válido")
@@ -118,6 +208,7 @@ const CheckoutFormContainer = () => {
         .max(200, "Solo se permiten hasta 200 caracteres.")
         .notRequired(),
     }),
+
     validateOnChange: onChangeValidation,
   });
 
@@ -140,23 +231,27 @@ const CheckoutFormContainer = () => {
     }
   }, [errors]);
 
-  let totalPrice = getTotalPriceCart();
-  let totalProducts = getTotalQuantityCart();
-
   return (
     <div>
-      <CheckoutForm
-        handleSubmit={handleSubmit}
-        handleChange={handleChange}
-        errors={errors}
-        values={values}
-        verificarCamposFaltantes={verificarCamposFaltantes}
-        cart={cart}
-        navigate={navigate}
-        deleteCartItem={deleteCartItem}
-        totalPrice={totalPrice}
-        totalProducts={totalProducts}
-      />
+      {orderId ? (
+        <div style={{ paddingTop: "70px" }}>
+          <h1>Gracias por su compra, su numero de orden es:</h1>
+          <h1>{orderId}</h1>
+        </div>
+      ) : (
+        <CheckoutForm
+          handleSubmit={handleSubmit}
+          handleChange={handleChange}
+          errors={errors}
+          values={values}
+          verificarCamposFaltantes={verificarCamposFaltantes}
+          cart={cart}
+          navigate={navigate}
+          deleteCartItem={deleteCartItem}
+          totalPrice={totalPrice}
+          totalProducts={totalQuantity}
+        />
+      )}
     </div>
   );
 };
