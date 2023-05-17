@@ -8,7 +8,8 @@ import CartContextProvider from "./context/CartContext";
 import CartContainer from "./components/Cart/CartContainer";
 import YesNoModal from "./utils/modals/YesNoModal/YesNoModal";
 import CheckoutFormContainer from "./components/CheckoutForm/CheckoutFormContainer";
-import FinishOrder from "./components/CheckoutForm/FinishOrder";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 const theme = createTheme({
   typography: {
@@ -31,31 +32,32 @@ function App() {
       <div>
         <BrowserRouter>
           <CartContextProvider>
-            <Routes>
-              <Route element={<NavbarContainer />}>
-                <Route path="/" element={<ItemListContainer />} />
-                <Route
-                  path="/category/:categoryName"
-                  element={<ItemListContainer />}
-                />
-                <Route
-                  path="/itemdetail/:id"
-                  element={<ItemDetailContainer />}
-                />
-                <Route path="/cart" element={<CartContainer />} />
-                <Route
-                  path="/checkoutform"
-                  element={<CheckoutFormContainer />}
-                />
-                {/* <Route
-                  path="/finishorder"
-                  element={<FinishOrder orderId={"asfjahsflaksfh"} />}
-                /> */}
-              </Route>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <Routes>
+                <Route element={<NavbarContainer />}>
+                  <Route path="/" element={<ItemListContainer />} />
+                  <Route
+                    path="/category/:categoryName"
+                    element={<ItemListContainer />}
+                  />
+                  <Route
+                    path="/itemdetail/:id"
+                    element={<ItemDetailContainer />}
+                  />
+                  <Route path="/cart" element={<CartContainer />} />
+                  <Route
+                    path="/checkoutform"
+                    element={<CheckoutFormContainer />}
+                  />
+                </Route>
 
-              {/* Ruta para páginas nos encontradas */}
-              <Route path="*" element={<h1>Lo siento la ruta no existe</h1>} />
-            </Routes>
+                {/* Ruta para páginas nos encontradas */}
+                <Route
+                  path="*"
+                  element={<h1>Lo siento la ruta no existe</h1>}
+                />
+              </Routes>
+            </LocalizationProvider>
           </CartContextProvider>
           <AlertToastify />
           <YesNoModal />

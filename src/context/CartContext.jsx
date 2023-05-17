@@ -23,11 +23,16 @@ const CartContextProvider = ({ children }) => {
   };
 
   const addToCart = (product) => {
+    if (product.reqStock && product?.stock <= 0) {
+      alertInfo("No hay stock del producto que desea agregar.");
+      return;
+    }
+
     const existe = isInCart(product?.id);
     if (existe) {
       let newCart = cart.map((item) => {
-        return item.id === product.id
-          ? { ...item, quantity: product.quantity }
+        return item?.id === product?.id
+          ? { ...item, quantity: product?.quantity }
           : item;
       });
       setCart(newCart);
@@ -42,14 +47,14 @@ const CartContextProvider = ({ children }) => {
 
   const getTotalQuantityCart = () => {
     let total = cart.reduce((acum, prod) => {
-      return acum + prod.quantity;
+      return acum + prod?.quantity;
     }, 0);
     return total;
   };
 
   const getTotalPriceCart = () => {
     let total = cart.reduce((acum, prod) => {
-      return acum + prod.price * prod.quantity;
+      return acum + prod?.price * prod?.quantity;
     }, 0);
     return total;
   };

@@ -17,6 +17,7 @@ import {
 import FinishOrder from "./FinishOrder";
 
 const CheckoutFormContainer = () => {
+  const [typeInCart, SetTypeInCart] = useState("");
   const [onChangeValidation, setOnChangeValidation] = useState(false);
   const [orderId, setOrderId] = useState(null);
   const { alertError, alertInfo } = UseAlert();
@@ -127,6 +128,7 @@ const CheckoutFormContainer = () => {
       ciudadEntrega: "",
       provinciaEntrega: "",
       observacionesEntrega: "",
+      fechaServicio: new Date().getDate(),
     },
 
     onSubmit: saveOrder,
@@ -208,6 +210,7 @@ const CheckoutFormContainer = () => {
       observacionesEntrega: Yup.string()
         .max(200, "Solo se permiten hasta 200 caracteres.")
         .notRequired(),
+        fechaServicio: Yup.date()
     }),
 
     validateOnChange: onChangeValidation,
@@ -232,12 +235,35 @@ const CheckoutFormContainer = () => {
     }
   }, [errors]);
 
+  useEffect(() => {
+    let resultado = "";
+    cart.map((p) => {
+      if (p?.reqStock === true) {
+        if (resultado === "Services" || resultado === "Products-Services") {
+          resultado = "Products-Services";
+        } else if (resultado === "") {
+          resultado = "Products";
+        }
+      } else {
+        if (resultado === "Products" || resultado === "Products-Services") {
+          resultado = "Products-Services";
+        } else if (resultado === "") {
+          resultado = "Services";
+        }
+      }
+    });
+    SetTypeInCart(resultado);
+  }, [cart]);
+
   return (
     <div>
       {orderId ? (
-        <FinishOrder orderId={orderId} alertInfo={alertInfo} navigate={navigate} />
+        <FinishOrder
+          orderId={orderId}
+          alertInfo={alertInfo}
+          navigate={navigate}
+        />
       ) : (
-        
         <CheckoutForm
           handleSubmit={handleSubmit}
           handleChange={handleChange}
@@ -248,7 +274,8 @@ const CheckoutFormContainer = () => {
           navigate={navigate}
           deleteCartItem={deleteCartItem}
           totalPrice={totalPrice}
-          totalProducts={totalQuantity}
+          totalQuantity={totalQuantity}
+          typeInCart={typeInCart}
         />
       )}
     </div>

@@ -66,30 +66,42 @@ const ItemDetail = ({
             <Typography>Stock disponible: {product.stock} unidades.</Typography>
           )}
           {product.reqStock ? (
-            <Box display={"flex"} alignItems={"center"} marginTop={"10px"}>
-              <Typography variant="h5" fontWeight={300}>
-                Cantidad:
-              </Typography>
-              <Counter
-                product={product}
-                counter={counter}
-                decrement={decrement}
-                increment={increment}
-              />
-              <Button
-                variant="contained"
-                color="secondary"
-                style={{ margin: "10px 0", padding: "5", fontSize: 12 }}
-                fontSize={20}
-                onClick={() => onAdd(product)}
+            product?.stock > 0 ? (
+              <Box display={"flex"} alignItems={"center"} marginTop={"10px"}>
+                <Typography variant="h5" fontWeight={300}>
+                  Cantidad:
+                </Typography>
+                <Counter
+                  product={product}
+                  counter={counter}
+                  decrement={decrement}
+                  increment={increment}
+                />
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  style={{ margin: "10px 0", padding: "5", fontSize: 12 }}
+                  fontSize={20}
+                  onClick={() => onAdd(product)}
+                >
+                  <i
+                    style={{ fontSize: 14, marginRight: ".3em" }}
+                    className={"bi bi-bag-plus-fill"}
+                  ></i>
+                  <span>AGREGAR AL CARRITO</span>
+                </Button>
+              </Box>
+            ) : (
+              <Typography
+                variant="body1"
+                color="primary.light"
+                fontWeight={300}
+                marginTop={"15px"}
+                marginBottom={"0"}
               >
-                <i
-                  style={{ fontSize: 14, marginRight: ".3em" }}
-                  className={"bi bi-bag-plus-fill"}
-                ></i>
-                <span>AGREGAR AL CARRITO</span>
-              </Button>
-            </Box>
+                No hay mas stcok de este producto.
+              </Typography>
+            )
           ) : (
             <Box>
               <Typography
