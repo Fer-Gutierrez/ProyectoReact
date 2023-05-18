@@ -34,6 +34,7 @@ const CheckoutFormContainer = () => {
   let totalQuantity = getTotalQuantityCart();
 
   const saveOrder = (data) => {
+    console.log(data);
     let withDelivery = data?.formaEnvio === "EAD" && true;
 
     let InfoDelivery = null;
@@ -119,7 +120,7 @@ const CheckoutFormContainer = () => {
       deptoComprador: "",
       ciudadComprador: "",
       provinciaComprador: "",
-      formaEnvio: "EAD",
+      formaEnvio: "REL",
       envioInfoComprador: false,
       calleEntrega: "",
       alturaEntrega: "",
@@ -128,7 +129,7 @@ const CheckoutFormContainer = () => {
       ciudadEntrega: "",
       provinciaEntrega: "",
       observacionesEntrega: "",
-      fechaServicio: new Date().getDate(),
+      disponibilidadServicio: "",
     },
 
     onSubmit: saveOrder,
@@ -210,7 +211,9 @@ const CheckoutFormContainer = () => {
       observacionesEntrega: Yup.string()
         .max(200, "Solo se permiten hasta 200 caracteres.")
         .notRequired(),
-        fechaServicio: Yup.date()
+      disponibilidadServicio: Yup.string()
+        .max(200, "Solo se permiten hasta 200 caracteres.")
+        .notRequired(),
     }),
 
     validateOnChange: onChangeValidation,

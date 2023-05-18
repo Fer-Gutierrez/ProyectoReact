@@ -8,8 +8,7 @@ import CartContextProvider from "./context/CartContext";
 import CartContainer from "./components/Cart/CartContainer";
 import YesNoModal from "./utils/modals/YesNoModal/YesNoModal";
 import CheckoutFormContainer from "./components/CheckoutForm/CheckoutFormContainer";
-import { LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+
 
 const theme = createTheme({
   typography: {
@@ -32,7 +31,6 @@ function App() {
       <div>
         <BrowserRouter>
           <CartContextProvider>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
               <Routes>
                 <Route element={<NavbarContainer />}>
                   <Route path="/" element={<ItemListContainer />} />
@@ -57,7 +55,6 @@ function App() {
                   element={<h1>Lo siento la ruta no existe</h1>}
                 />
               </Routes>
-            </LocalizationProvider>
           </CartContextProvider>
           <AlertToastify />
           <YesNoModal />

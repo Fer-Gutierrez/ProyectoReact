@@ -1,8 +1,7 @@
-import { Button, TextField, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import DeliveryForm from "./DeliveryForm";
 import CustomerForm from "./CustomerForm";
 import CartItem from "../Cart/CartItem";
-import ServiceForm from "./ServiceForm";
 
 const CheckoutForm = ({
   handleChange,
@@ -15,8 +14,9 @@ const CheckoutForm = ({
   deleteCartItem,
   totalPrice,
   totalQuantity,
-  typeInCart,
+  typeInCart
 }) => {
+
   return (
     <div style={{ padding: "70px 7.5% 0 7.5%" }}>
       <Typography variant="h3" color="secondary.dark" fontWeight={600}>
@@ -44,33 +44,12 @@ const CheckoutForm = ({
           </div>
           <form action="" onSubmit={handleSubmit}>
             <CustomerForm handleChange={handleChange} errors={errors} />
-            {typeInCart === "Products" ? (
-              <DeliveryForm
-                handleChange={handleChange}
-                errors={errors}
-                values={values}
-              />
-            ) : typeInCart === "Services" ? (
-              <ServiceForm
-                handleChange={handleChange}
-                errors={errors}
-                values={values}
-              />
-            ) : (
-              <div>
-                <DeliveryForm
-                  handleChange={handleChange}
-                  errors={errors}
-                  values={values}
-                />
-                <ServiceForm
-                  handleChange={handleChange}
-                  errors={errors}
-                  values={values}
-                />
-              </div>
-            )}
-
+            <DeliveryForm
+              handleChange={handleChange}
+              errors={errors}
+              values={values}
+              typeInCart={typeInCart}
+            />
             <div
               style={{
                 padding: "20px 0",
