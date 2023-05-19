@@ -11,7 +11,7 @@
   align-items: center;
   padding: 0 7.5%;
   background-color: #d0a9a2;
-  box-shadow: 0px 0px 5px rgb(164, 164, 164) !important;
+  box-shadow: 0px 0px 5px #a4a4a4 !important;
   position: fixed;
   width: 100%;
   z-index: 100;
@@ -51,3 +51,9 @@
 .navbar .cartWidget {
   color: rgb(63, 63, 63);
 }
+
+.contenedorCartMenu {
+  display: flex;
+  align-items: center;
+}
+

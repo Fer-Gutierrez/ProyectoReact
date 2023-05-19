@@ -9,6 +9,7 @@ import UseAlert from "../../utils/alerts/UseAlert";
 const NavbarContainer = () => {
   const [categories, setCategories] = useState([]);
   const { alertInfo } = UseAlert();
+  const [navOpen, setNavOpen] = useState(false);
 
   const { getTotalQuantityCart } = useContext(CartContext);
   let total = getTotalQuantityCart();
@@ -30,7 +31,12 @@ const NavbarContainer = () => {
 
   return (
     <>
-      <Navbar total={total} categories={categories} />
+      <Navbar
+        navOpen={navOpen}
+        setNavOpen={setNavOpen}
+        total={total}
+        categories={categories}
+      />
       {categories.length > 0 && <Outlet />}
     </>
   );
