@@ -1,8 +1,9 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Tooltip, Typography } from "@mui/material";
 import React from "react";
 import Counter from "./Counter";
 import styles from "./ItemDetail.module.css";
 import Loader from "../Loader/Loader";
+import { BsFillBagCheckFill } from "react-icons/bs";
 
 const ItemDetail = ({
   product,
@@ -32,7 +33,7 @@ const ItemDetail = ({
           <Typography className={styles.descriptionItem}>
             {product.description}
           </Typography>
-          <Typography variant="h4" color="primary.dark" marginTop={"10px"}>
+          <Typography className={styles.priceItem}>
             ${" "}
             {Number(product.price).toLocaleString("es-AR", {
               minimumFractionDigits: 2,
@@ -53,19 +54,22 @@ const ItemDetail = ({
                   decrement={decrement}
                   increment={increment}
                 />
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  style={{ margin: "10px 0", padding: "5", fontSize: 12 }}
-                  fontSize={20}
-                  onClick={() => onAdd(product)}
-                >
-                  <i
-                    style={{ fontSize: 14, marginRight: ".3em" }}
-                    className={"bi bi-bag-plus-fill"}
-                  ></i>
-                  <span>AGREGAR AL CARRITO</span>
-                </Button>
+                <Tooltip title="Agregar al carrito">
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    className={styles.btnAddToCart}
+                    onClick={() => onAdd(product)}
+                  >
+                    <i
+                      style={{ fontSize: 14 }}
+                      className={"bi bi-bag-plus-fill"}
+                    ></i>
+                    <span className={styles.spanAddToCart}>
+                      AGREGAR AL CARRITO
+                    </span>
+                  </Button>
+                </Tooltip>
               </Box>
             ) : (
               <Typography
@@ -89,18 +93,20 @@ const ItemDetail = ({
               >
                 Solo puedes llevar una unidad de este servicio.
               </Typography>
-              <Button
-                variant="contained"
-                color="secondary"
-                style={{ margin: "10px 0", padding: "5", fontSize: 12 }}
-                onClick={() => onAdd(product)}
-              >
-                <i
-                  style={{ fontSize: 14, marginRight: ".3em" }}
-                  className={"bi bi-bag-plus-fill"}
-                ></i>
-                <span>AGREGAR AL CARRITO</span>
-              </Button>
+              <Tooltip title="Agregar al carrito">
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  style={{ margin: "10px 0", padding: "5", fontSize: 12 }}
+                  onClick={() => onAdd(product)}
+                >
+                  <i
+                    style={{ fontSize: 14, marginRight: ".3em" }}
+                    className={"bi bi-bag-plus-fill"}
+                  ></i>
+                  <span>AGREGAR AL CARRITO</span>
+                </Button>
+              </Tooltip>
             </Box>
           )}
 
@@ -110,14 +116,25 @@ const ItemDetail = ({
             </Typography>
           )}
           {getTotalQuantityCart() > 0 && (
-            <Button
-              onClick={() => navigate("/cart")}
-              variant="contained"
-              color="secondary"
-              style={{ margin: "10px 0", padding: "5", fontSize: 12 }}
+            <div
+              style={{
+                marginTop: "1rem",
+                display: "flex",
+                justifyContent: "center",
+              }}
             >
-              Terminar Compra
-            </Button>
+              <Button
+                onClick={() => navigate("/cart")}
+                variant="contained"
+                color="secondary"
+                style={{ margin: "10px 0", padding: "5", fontSize: 12 }}
+              >
+                <BsFillBagCheckFill
+                  style={{ marginRight: ".3rem", fontSize: "1.5rem" }}
+                />{" "}
+                Terminar Compra
+              </Button>
+            </div>
           )}
         </Box>
       </Box>

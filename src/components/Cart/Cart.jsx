@@ -1,5 +1,8 @@
 import { Box, Button, Typography } from "@mui/material";
 import CartItem from "./CartItem";
+import styles from "./Cart.module.css";
+import DeleteIcon from "@mui/icons-material/Delete";
+import AddBoxIcon from "@mui/icons-material/AddBox";
 
 const Cart = ({
   cart,
@@ -13,54 +16,59 @@ const Cart = ({
     <div style={{ padding: "70px 7.5% 0 7.5%" }}>
       {totalQuantity > 0 ? (
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <Typography
-            variant="h3"
-            fontWeight={600}
-            color="secondary.dark"
-            margin={"10px 0px"}
-            alignSelf={"center"}
-          >
-            Tu carrito
-          </Typography>
+          <Typography className={styles.cartTitle}>Tu carrito</Typography>
           <CartItem
             cart={cart}
             deleteCartItem={deleteCartItem}
             navigate={navigate}
           />
-          <h1>
-            Total de su compra: {"$ "}{" "}
-            {Number(totalPrice).toLocaleString("es-AR", {
-              minimumFractionDigits: 2,
-            })}
-          </h1>
-          <h1>
+          <div className={styles.totalPriceContainer}>
+            <h1 className={styles.totalPriceText}>Total de tu compra:</h1>
+            <div className={styles.boxTotalPrice}>
+              {"$ "}{" "}
+              {Number(totalPrice).toLocaleString("es-AR", {
+                minimumFractionDigits: 2,
+              })}
+            </div>
+          </div>
+          <p className={styles.totalQuantityCart}>
             {totalQuantity > 1
-              ? `Estas llevando ${totalQuantity} productos`
-              : `Estas llevando ${totalQuantity} producto.`}
-          </h1>
-          <Box>
+              ? `Estas llevando ${totalQuantity} elementos`
+              : `Estas llevando ${totalQuantity} elemento.`}
+          </p>
+          <Box
+            sx={{
+              justifyContent: "space-evenly",
+              alignItems: "center",
+              display: "flex",
+            }}
+          >
             <Button
               onClick={deleteCart}
               variant="contained"
               color="secondary"
-              style={{
-                margin: "10px auto 0 10px",
-                padding: "10px",
-                fontSize: 14,
-              }}
+              className={styles.btnDeleteCart}
             >
+              <DeleteIcon
+                sx={{
+                  marginRight:{xs: ".1rem", sm:".3rem"},
+                  fontSize: { xs: "medim", sm: "large" },
+                }}
+              />
               Borrar Carrito
             </Button>
             <Button
               onClick={() => navigate("/")}
               variant="contained"
               color="secondary"
-              style={{
-                margin: "10px auto 0 10px",
-                padding: "10px",
-                fontSize: 14,
-              }}
+              className={styles.btnDeleteCart}
             >
+              <AddBoxIcon
+                sx={{
+                  marginRight:{xs: ".1rem", sm:".3rem"},
+                  fontSize: { xs: "medim", sm: "large" },
+                }}
+              />{" "}
               Agregar mas productos
             </Button>
           </Box>

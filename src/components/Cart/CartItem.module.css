@@ -1,0 +1,43 @@
+.containerItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: .5rem !important;
+    border-bottom: solid 1px var(--primaryLinghtColor);
+    padding: .5rem;
+}
+.titleItem {
+    color: var(--primaryMaintColor);
+    font-size: 1.5rem;
+
+}
+
+.unitPriceItem {
+    color: var(--primaryLinghtColor);
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+.subtotalPriceItem {
+    color: var(--primaryLinghtColor);
+    font-size: 2rem;
+    margin: 0 1rem;
+    text-align: right;
+    font-weight: 400;
+}
+
+.btnContainer{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+@media (max-width: 600px) {
+    .titleItem {
+        font-size: 1.2rem;
+    }
+
+    .subtotalPriceItem {
+        font-size: 1.4rem;
+    }
+}

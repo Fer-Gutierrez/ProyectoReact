@@ -81,7 +81,7 @@ const Navbar = ({ total, categories, navOpen, setNavOpen }) => {
             />
           </IconButton>
         </div>
-        <Divider />
+        <Divider style={{ color: "whitesmoke" }} />
         <List>
           {categories.length > 0 &&
             categories.map((category) => {

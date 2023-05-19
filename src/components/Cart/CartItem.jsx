@@ -1,48 +1,58 @@
-import { Button } from "@mui/material";
+import { Button, Tooltip } from "@mui/material";
 import React from "react";
+import styles from "./CartItem.module.css";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 
 const CartItem = ({ cart, deleteCartItem, navigate }) => {
   return (
     <div>
       {cart.map((prod) => {
         return (
-          <div
-            key={prod?.id}
-            style={{ margin: "10px", border: "solid 1px gray" }}
-          >
-            <h1>
-              {prod?.quantity} {prod?.name}
-            </h1>
-            <h2>
-              Precio unitario: ${" "}
-              {Number(prod?.price).toLocaleString("es-AR", {
-                minimumFractionDigits: 2,
-              })}
-            </h2>
-            <h2>
-              Subtotal: ${" "}
-              {Number(prod?.price * prod?.quantity).toLocaleString("es-AR", {
-                minimumFractionDigits: 2,
-              })}
-            </h2>
-            <Button
-              onClick={() => deleteCartItem(prod?.id)}
-              variant="contained"
-              color="secondary"
-              style={{ margin: "10px 0", padding: "3px", fontSize: 10 }}
-            >
-              Eliminar
-            </Button>
-            <Button
-              onClick={() => {
-                navigate(`/itemdetail/${prod?.id}`);
-              }}
-              variant="contained"
-              color="secondary"
-              style={{ margin: "10px 0", padding: "3px", fontSize: 10 }}
-            >
-              Modificar
-            </Button>
+          <div key={prod?.id} className={styles.containerItem}>
+            <div>
+              <h1 className={styles.titleItem}>
+                {prod?.quantity} {prod?.name}
+              </h1>
+              <h2 className={styles.unitPriceItem}>
+                Precio unitario: ${" "}
+                {Number(prod?.price).toLocaleString("es-AR", {
+                  minimumFractionDigits: 2,
+                })}
+              </h2>
+            </div>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <h2 className={styles.subtotalPriceItem}>
+                ${" "}
+                {Number(prod?.price * prod?.quantity).toLocaleString("es-AR", {
+                  minimumFractionDigits: 2,
+                })}
+              </h2>
+              <div className={styles.btnContainer}>
+                <Tooltip title="Editar elemento">
+                  <Button
+                    onClick={() => {
+                      navigate(`/itemdetail/${prod?.id}`);
+                    }}
+                    variant="contained"
+                    color="secondary"
+                    style={{ fontSize: 10, padding: "3px", minWidth: 0 }}
+                  >
+                    <EditIcon />
+                  </Button>
+                </Tooltip>
+                <Tooltip title="Borrar elemento">
+                  <Button
+                    onClick={() => deleteCartItem(prod?.id)}
+                    variant="contained"
+                    color="secondary"
+                    style={{ fontSize: 10, padding: "3px", minWidth: 0 }}
+                  >
+                    <DeleteIcon />
+                  </Button>
+                </Tooltip>
+              </div>
+            </div>
           </div>
         );
       })}

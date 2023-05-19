@@ -1,0 +1,53 @@
+.btnDeleteCart {
+  margin: 1rem 0.4rem 0 1rem !important;
+  padding: 0.6rem !important;
+  font-size: 1.4rem !important;
+}
+
+.cartTitle {
+  font-size: 3rem !important;
+  font-weight: 600 !important;
+  color: var(--secondaryMainColor);
+  margin: 1rem 0;
+  align-self: center;
+}
+
+.totalPriceContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.boxTotalPrice {
+  background-color: var(--secondaryMainColor);
+  font-size: 3rem;
+  color: var(--secondaryLinghtColor);
+  padding: 1rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: 0.3rem;
+  border-radius: 1.5rem;
+  box-shadow: 0px 0px 5px #515050;
+}
+
+.totalPriceText {
+  margin-top: 2.5rem;
+  color: var(--primaryLinghtColor);
+}
+.totalQuantityCart {
+  font-size: 1rem;
+  color: var(--primaryLinghtColor);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 600px) {
+  .totalPriceText {
+  }
+  .totalQuantityCart {
+  }
+
+  .btnDeleteCart {
+    font-size: 1rem !important;
+  }
+}
