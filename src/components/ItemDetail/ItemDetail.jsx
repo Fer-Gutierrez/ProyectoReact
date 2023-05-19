@@ -19,20 +19,8 @@ const ItemDetail = ({
 
   return (
     <Box padding={"70px 7.5% 0 7.5%"} marginBottom={7}>
-      <Box
-        border={"solid 1px"}
-        borderColor={"primary.light"}
-        borderRadius={"5px"}
-        display={"grid"}
-        gridTemplateColumns={"4fr 3fr"}
-        gap={"10px"}
-      >
-        <Box
-          display={"flex"}
-          padding={"10px"}
-          backgroundColor="whitesmoke"
-          borderRadius={"5px"}
-        >
+      <Box className={styles.cardContenedor}>
+        <Box className={styles.imgContenedor}>
           <img
             className={styles.imgDescription}
             src={product.img}
@@ -40,20 +28,8 @@ const ItemDetail = ({
           />
         </Box>
         <Box padding={"10px"}>
-          <Typography
-            variant={"h3"}
-            fontWeight={600}
-            color="secondary.dark"
-            margin={"10px 0px"}
-          >
-            {product.name}
-          </Typography>
-          <Typography
-            variant="body1"
-            fontWeight={300}
-            fontSize={"1.5rem"}
-            color="primary.light"
-          >
+          <Typography className={styles.tituloItem}>{product.name}</Typography>
+          <Typography className={styles.descriptionItem}>
             {product.description}
           </Typography>
           <Typography variant="h4" color="primary.dark" marginTop={"10px"}>
