@@ -1,19 +1,29 @@
-html{
+:root {
+  --primaryLinghtColor: #546e7a;
+  --primaryMaintColor: #37474f;
+  --primaryDarkColor: #263238;
+  --secondaryLinghtColor: #edebe8;
+  --secondaryMainColor: #d0a9a2;
+  --secondaryDarkColor: #a1836a;
+}
+
+html {
   font-size: 62.5%;
 }
 
-a{
+a {
   text-decoration: none;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Inter", "Roboto",
-    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #edebe8;  
+  background-color: var(--secondaryLinghtColor);
 }
 
 code {
