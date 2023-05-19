@@ -13,7 +13,9 @@ const FinishOrder = ({ orderId, alertInfo, navigate }) => {
         alignItems: "center",
       }}
     >
-      <h1 style={{ fontSize: "4rem", marginBottom: "4rem" }}>
+      <h1
+        style={{ fontSize: "4rem", marginBottom: "4rem", textAlign: "center" }}
+      >
         ¡Gracias por tu compra!
       </h1>
       <h2 style={{ fontWeight: "300" }}>Tu pedido tiene el siguiente código</h2>

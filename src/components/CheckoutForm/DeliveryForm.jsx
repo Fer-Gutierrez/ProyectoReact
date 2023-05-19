@@ -17,7 +17,7 @@ const DeliveryForm = ({ handleChange, errors, values, typeInCart }) => {
   return (
     <div style={{ padding: "1rem 2rem" }}>
       {(typeInCart === "Services" || typeInCart === "Products-Services") && (
-        <div fullWidth>
+        <div>
           <Typography
             marginTop={"5rem"}
             marginBottom={"2rem"}
@@ -67,26 +67,6 @@ const DeliveryForm = ({ handleChange, errors, values, typeInCart }) => {
                   <FormControlLabel
                     name="formaEnvio"
                     onChange={handleChange}
-                    value="EAD"
-                    control={<Radio />}
-                    label={
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: 4,
-                        }}
-                      >
-                        <LocalShippingRoundedIcon fontSize="large" /> Entrega a
-                        domicilio
-                      </div>
-                    }
-                  />
-                </Button>
-                <Button variant="outlined">
-                  <FormControlLabel
-                    name="formaEnvio"
-                    onChange={handleChange}
                     value="REL"
                     control={<Radio />}
                     label={
@@ -99,6 +79,26 @@ const DeliveryForm = ({ handleChange, errors, values, typeInCart }) => {
                       >
                         <AddBusinessRoundedIcon fontSize="large" /> Retiro en
                         Local
+                      </div>
+                    }
+                  />
+                </Button>
+                <Button variant="outlined">
+                  <FormControlLabel
+                    name="formaEnvio"
+                    onChange={handleChange}
+                    value="EAD"
+                    control={<Radio />}
+                    label={
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 4,
+                        }}
+                      >
+                        <LocalShippingRoundedIcon fontSize="large" /> Entrega a
+                        domicilio
                       </div>
                     }
                   />
@@ -264,7 +264,7 @@ const DeliveryForm = ({ handleChange, errors, values, typeInCart }) => {
                     }
                   />
                 </Grid>
-                <Grid item xs={11} sm={11} lg={11}>
+                <Grid item xs={11} sm={12} lg={12}>
                   <TextField
                     id="observacionesEntrega"
                     color="secondary"

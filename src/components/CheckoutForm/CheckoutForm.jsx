@@ -14,7 +14,7 @@ const CheckoutForm = ({
   deleteCartItem,
   totalPrice,
   totalQuantity,
-  typeInCart
+  typeInCart,
 }) => {
 
   return (

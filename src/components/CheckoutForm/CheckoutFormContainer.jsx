@@ -35,12 +35,14 @@ const CheckoutFormContainer = () => {
 
   const saveOrder = (data) => {
     console.log(data);
-    let withDelivery = data?.formaEnvio === "EAD" && true;
 
-    let InfoDelivery = null;
+    //Productos:
+    let productsItems = cart.filter((i) => i.reqStock === true);
+    let conDelivery = data?.formaEnvio === "EAD" && true;
+    let infoDelivery = null;
     if (data?.formaEnvio === "EAD") {
       if (data?.envioInfoComprador) {
-        InfoDelivery = {
+        infoDelivery = {
           calleEntrega: data?.calleComprador,
           alturaEntrega: data?.alturaComprador,
           pisoEntrega: data?.pisoComprador,
@@ -50,7 +52,7 @@ const CheckoutFormContainer = () => {
           observacionesEntrega: data?.observacionesEntrega,
         };
       } else {
-        InfoDelivery = {
+        infoDelivery = {
           calleEntrega: data?.calleEntrega,
           alturaEntrega: data?.alturaEntrega,
           pisoEntrega: data?.pisoEntrega,
@@ -62,6 +64,32 @@ const CheckoutFormContainer = () => {
       }
     }
 
+    let products =
+      productsItems.length > 0
+        ? {
+            conDelivery,
+            infoDelivery,
+            productsItems,
+          }
+        : null;
+
+    //Servicios:
+    let servicesItems = cart.filter((i) => i.reqStock === false);
+    let services =
+      servicesItems.length > 0
+        ? {
+            disponibilidadFechas:
+              data.tipoCompra === "Services" ||
+              data.tipoCompra === "Products-Services"
+                ? data.disponibilidadServicio
+                : null,
+            servicesItems,
+          }
+        : null;
+
+    console.log(services);
+    console.log(products);
+    //Creacion de Orden de Venta:
     const dataOrder = {
       buyer: {
         nombre: data?.nombreComprador,
@@ -76,11 +104,11 @@ const CheckoutFormContainer = () => {
         ciudad: data?.ciudadComprador,
         provincia: data?.provinciaComprador,
       },
-      items: cart,
-      totalPrice,
-      totalQuantity,
-      withDelivery,
-      InfoDelivery,
+      products,
+      services,
+      montoTotal: totalPrice,
+      cantidadTotalItems: totalQuantity,
+      tipoVenta: data.tipoCompra,
       date: serverTimestamp(),
     };
 
@@ -88,7 +116,7 @@ const CheckoutFormContainer = () => {
     addDoc(ordersColl, dataOrder)
       .then((res) => {
         setOrderId(res.id);
-        editSoldProducts(dataOrder.items);
+        editSoldProducts(dataOrder.products?.productsItems);
         deleteCart(true);
       })
       .catch((err) => {
@@ -98,7 +126,7 @@ const CheckoutFormContainer = () => {
   };
 
   const editSoldProducts = (soldProducts) => {
-    soldProducts.length > 0 &&
+    soldProducts?.length > 0 &&
       soldProducts.map((p) => {
         if (p.reqStock) {
           let product = doc(db, "products", p.id);
@@ -130,91 +158,103 @@ const CheckoutFormContainer = () => {
       provinciaEntrega: "",
       observacionesEntrega: "",
       disponibilidadServicio: "",
+      tipoCompra: typeInCart,
     },
 
     onSubmit: saveOrder,
 
-    validationSchema: Yup.object().shape({
-      emailComprador: Yup.string()
-        .email("Debe ser un email válido")
-        .required("Este campo es requerido")
-        .max(50, "No debe superar 50 caracteres"),
-      dniComprador: Yup.number("Debe ser numérico de 8 caracteres.")
-        .max(99999999, "Debe tener 8 caracteres")
-        .min(10000000, "Debe tener 8 caracteres")
-        .required("Esta campo es requerido"),
-      celComprador: Yup.string()
-        .matches(
-          /^[1-9][0-9].{8,10}$/,
-          "Debe ser numérico sin 0 y in 15 con un máximo de 10 caracteres"
-        )
-        .required("Este campo es requerido"),
-      nombreComprador: Yup.string()
-        .required("Este campo es requerido")
-        .max(50, "No debe superar 50 caracteres"),
-      apellidoComprador: Yup.string()
-        .max(50, "No puede superar 50 caracteres")
-        .required("Este campo es requerido"),
-      calleComprador: Yup.string()
-        .required("Este campo es requerido")
-        .max(50, "No debe superar 50 caracteres"),
-      alturaComprador: Yup.number("El campo debe ser numérico").required(
-        "Este campo es requerido"
-      ),
-      pisoComprador: Yup.number().optional().nullable(),
-      deptoComprador: Yup.string().nullable(),
-      ciudadComprador: Yup.string()
-        .max(50, "No debe superar 50 caracteres")
-        .required("Este campo es requerido"),
-      provinciaComprador: Yup.string()
-        .max(50, "No debe superar 50 caracteres")
-        .required("Este campo es requerido"),
-      formaEnvio: Yup.string().required(),
-      envioInfoComprador: Yup.boolean(),
-      calleEntrega: Yup.string().when(["formaEnvio", "envioInfoComprador"], {
-        is: (formaEnvio, envioInfoComprador) =>
-          formaEnvio === "EAD" && !envioInfoComprador,
-        then: (schema) =>
-          schema
-            .required("Este campo es requerido")
-            .max(50, "No debe superar 50 caracteres"),
-      }),
-      alturaEntrega: Yup.number("El campo debe ser numérico").when(
-        ["formaEnvio", "envioInfoComprador"],
-        {
-          is: (formaEnvio, envioInfoComprador) =>
-            formaEnvio === "EAD" && !envioInfoComprador,
-          then: (schema) => schema.required("Este campo es requerido"),
-        }
-      ),
-      pisoEntrega: Yup.number().optional().nullable(),
-      deptoEntrega: Yup.string().nullable(),
-      ciudadEntrega: Yup.string().when(["formaEnvio", "envioInfoComprador"], {
-        is: (formaEnvio, envioInfoComprador) =>
-          formaEnvio === "EAD" && !envioInfoComprador,
-        then: (schema) =>
-          schema
-            .required("Este campo es requerido")
-            .max(50, "No debe superar 50 caracteres"),
-      }),
-      provinciaEntrega: Yup.string().when(
-        ["formaEnvio", "envioInfoComprador"],
-        {
+    validationSchema: () => {
+      values.tipoCompra = typeInCart;
+      console.log(values.tipoCompra);
+      return Yup.object().shape({
+        emailComprador: Yup.string()
+          .email("Debe ser un email válido")
+          .required("Este campo es requerido")
+          .max(50, "No debe superar 50 caracteres"),
+        dniComprador: Yup.number("Debe ser numérico de 8 caracteres.")
+          .max(99999999, "Debe tener 8 caracteres")
+          .min(10000000, "Debe tener 8 caracteres")
+          .required("Esta campo es requerido"),
+        celComprador: Yup.string()
+          .matches(
+            /^[1-9][0-9].{8,10}$/,
+            "Debe ser numérico sin 0 y in 15 con un máximo de 10 caracteres"
+          )
+          .required("Este campo es requerido"),
+        nombreComprador: Yup.string()
+          .required("Este campo es requerido")
+          .max(50, "No debe superar 50 caracteres")
+          .min(3, "Debe tener al menos 3 caracteres"),
+        apellidoComprador: Yup.string()
+          .max(50, "No puede superar 50 caracteres")
+          .required("Este campo es requerido"),
+        calleComprador: Yup.string()
+          .required("Este campo es requerido")
+          .max(50, "No debe superar 50 caracteres"),
+        alturaComprador: Yup.number("El campo debe ser numérico").required(
+          "Este campo es requerido"
+        ),
+        pisoComprador: Yup.number().optional().nullable(),
+        deptoComprador: Yup.string().nullable(),
+        ciudadComprador: Yup.string()
+          .max(50, "No debe superar 50 caracteres")
+          .required("Este campo es requerido"),
+        provinciaComprador: Yup.string()
+          .max(50, "No debe superar 50 caracteres")
+          .required("Este campo es requerido"),
+        formaEnvio: Yup.string().required(),
+        envioInfoComprador: Yup.boolean(),
+        calleEntrega: Yup.string().when(["formaEnvio", "envioInfoComprador"], {
           is: (formaEnvio, envioInfoComprador) =>
             formaEnvio === "EAD" && !envioInfoComprador,
           then: (schema) =>
             schema
               .required("Este campo es requerido")
               .max(50, "No debe superar 50 caracteres"),
-        }
-      ),
-      observacionesEntrega: Yup.string()
-        .max(200, "Solo se permiten hasta 200 caracteres.")
-        .notRequired(),
-      disponibilidadServicio: Yup.string()
-        .max(200, "Solo se permiten hasta 200 caracteres.")
-        .notRequired(),
-    }),
+        }),
+        alturaEntrega: Yup.number("El campo debe ser numérico").when(
+          ["formaEnvio", "envioInfoComprador"],
+          {
+            is: (formaEnvio, envioInfoComprador) =>
+              formaEnvio === "EAD" && !envioInfoComprador,
+            then: (schema) => schema.required("Este campo es requerido"),
+          }
+        ),
+        pisoEntrega: Yup.number().optional().nullable(),
+        deptoEntrega: Yup.string().nullable(),
+        ciudadEntrega: Yup.string().when(["formaEnvio", "envioInfoComprador"], {
+          is: (formaEnvio, envioInfoComprador) =>
+            formaEnvio === "EAD" && !envioInfoComprador,
+          then: (schema) =>
+            schema
+              .required("Este campo es requerido")
+              .max(50, "No debe superar 50 caracteres"),
+        }),
+        provinciaEntrega: Yup.string().when(
+          ["formaEnvio", "envioInfoComprador"],
+          {
+            is: (formaEnvio, envioInfoComprador) =>
+              formaEnvio === "EAD" && !envioInfoComprador,
+            then: (schema) =>
+              schema
+                .required("Este campo es requerido")
+                .max(50, "No debe superar 50 caracteres"),
+          }
+        ),
+        observacionesEntrega: Yup.string()
+          .max(200, "Solo se permiten hasta 200 caracteres.")
+          .notRequired(),
+        tipoCompra: Yup.string(),
+        disponibilidadServicio: Yup.string().when(["tipoCompra"], {
+          is: (tipoCompra) =>
+            tipoCompra === "Services" || tipoCompra === "Products-Services",
+          then: (schema) =>
+            schema
+              .required("Este campo es requerido")
+              .max(200, "No debe superar 50 caracteres"),
+        }),
+      });
+    },
 
     validateOnChange: onChangeValidation,
   });
