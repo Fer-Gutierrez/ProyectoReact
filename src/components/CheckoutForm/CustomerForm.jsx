@@ -1,17 +1,11 @@
 import { Grid, TextField, Typography } from "@mui/material";
 import React from "react";
+import styles from "./CheckoutForm.module.css";
 
 const CustomerForm = ({ handleChange, errors }) => {
   return (
     <div>
-      <Typography
-        marginTop={"5rem"}
-        variant="h3"
-        color="secondary.dark"
-        fontWeight={600}
-      >
-        Completá tus datos personales
-      </Typography>
+      <h1 className={styles.titles}>Completá tus datos personales</h1>
       <Grid
         container
         spacing={2}

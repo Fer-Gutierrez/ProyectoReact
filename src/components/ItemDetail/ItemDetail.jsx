@@ -127,7 +127,7 @@ const ItemDetail = ({
                 onClick={() => navigate("/cart")}
                 variant="contained"
                 color="secondary"
-                style={{ margin: "10px 0", padding: "5", fontSize: 12 }}
+                className={styles.btnFinishBuy}
               >
                 <BsFillBagCheckFill
                   style={{ marginRight: ".3rem", fontSize: "1.5rem" }}

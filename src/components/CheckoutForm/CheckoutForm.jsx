@@ -2,6 +2,7 @@ import { Button, Typography } from "@mui/material";
 import DeliveryForm from "./DeliveryForm";
 import CustomerForm from "./CustomerForm";
 import CartItem from "../Cart/CartItem";
+import styles from "./CheckoutForm.module.css";
 
 const CheckoutForm = ({
   handleChange,
@@ -16,12 +17,11 @@ const CheckoutForm = ({
   totalQuantity,
   typeInCart,
 }) => {
-
   return (
     <div style={{ padding: "70px 7.5% 0 7.5%" }}>
-      <Typography variant="h3" color="secondary.dark" fontWeight={600}>
+      <h1 className={styles.titles}>
         Resumen de su pedido
-      </Typography>
+      </h1>
       <CartItem
         cart={cart}
         deleteCartItem={deleteCartItem}
@@ -29,18 +29,26 @@ const CheckoutForm = ({
       />
       {cart.length > 0 ? (
         <div>
-          <div style={{ padding: ".3rem 2rem" }}>
-            <Typography variant="h4" color="primary" fontWeight={800}>
-              Total de compra: {"$ "}{" "}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              padding: ".3rem 2rem",
+            }}
+          >
+            <h1 className={styles.totalPriceText}>Total de compra</h1>
+            <div className={styles.boxTotalPrice}>
+              {"$ "}{" "}
               {Number(totalPrice).toLocaleString("es-AR", {
                 minimumFractionDigits: 2,
               })}
-            </Typography>
-            <Typography variant="h4" color="primary" fontWeight={800}>
+            </div>
+            <h1 className={styles.totalQuantityCart}>
               {totalQuantity > 1
                 ? `Estas llevando ${totalQuantity} productos.`
                 : `Estas llevando ${totalQuantity} producto.`}
-            </Typography>
+            </h1>
           </div>
           <form action="" onSubmit={handleSubmit}>
             <CustomerForm handleChange={handleChange} errors={errors} />

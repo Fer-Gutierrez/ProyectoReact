@@ -15,13 +15,24 @@ const CartItem = ({ cart, deleteCartItem, navigate }) => {
                 {prod?.quantity} {prod?.name}
               </h1>
               <h2 className={styles.unitPriceItem}>
+                {prod?.quantity > 1
+                  ? `${prod?.quantity} Unidades`
+                  : `${prod?.quantity} Unidad`}{" "}
+              </h2>
+              <h2 className={styles.unitPriceItem}>
                 Precio unitario: ${" "}
                 {Number(prod?.price).toLocaleString("es-AR", {
                   minimumFractionDigits: 2,
                 })}
               </h2>
             </div>
-            <div style={{ display: "flex", alignItems: "center" }}>
+            <div
+              style={{
+                display: "flex",
+                marginLeft: "auto",
+                alignItems: "center",
+              }}
+            >
               <h2 className={styles.subtotalPriceItem}>
                 ${" "}
                 {Number(prod?.price * prod?.quantity).toLocaleString("es-AR", {
@@ -35,7 +46,7 @@ const CartItem = ({ cart, deleteCartItem, navigate }) => {
                       navigate(`/itemdetail/${prod?.id}`);
                     }}
                     variant="contained"
-                    color="secondary"
+                    color="light"
                     style={{ fontSize: 10, padding: "3px", minWidth: 0 }}
                   >
                     <EditIcon />
@@ -45,7 +56,7 @@ const CartItem = ({ cart, deleteCartItem, navigate }) => {
                   <Button
                     onClick={() => deleteCartItem(prod?.id)}
                     variant="contained"
-                    color="secondary"
+                    color="light"
                     style={{ fontSize: 10, padding: "3px", minWidth: 0 }}
                   >
                     <DeleteIcon />

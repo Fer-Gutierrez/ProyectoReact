@@ -12,29 +12,20 @@ import {
 import React from "react";
 import LocalShippingRoundedIcon from "@mui/icons-material/LocalShippingRounded";
 import AddBusinessRoundedIcon from "@mui/icons-material/AddBusinessRounded";
+import styles from "./CheckoutForm.module.css";
 
 const DeliveryForm = ({ handleChange, errors, values, typeInCart }) => {
   return (
     <div style={{ padding: "1rem 2rem" }}>
       {(typeInCart === "Services" || typeInCart === "Products-Services") && (
-        <div>
-          <Typography
-            marginTop={"5rem"}
-            marginBottom={"2rem"}
-            variant="h3"
-            color="secondary.dark"
-            fontWeight={600}
-          >
-            ¿Como queres recibir el tu lectura?
-          </Typography>
-          <h3 style={{ fontWeight: "300", marginBottom: ".4rem" }}>
+        <div style={{marginBottom: "3rem"}}>
+          <h1 className={styles.titles}>¿Como queres recibir el tu lectura?</h1>
+          <p >
             Las lecturas y preguntas de astrologia y tarot seran coordinadas
-            segun disponibilidad.
-          </h3>
-          <h3 style={{ fontWeight: "300", marginBottom: ".4rem" }}>
+            segun disponibilidad. <br/>
             Indicanos un comentario para conocer tu disponibilidad de fechas y
             horarios:
-          </h3>
+          </p>
           <TextField
             id="disponibilidadServicio"
             color="secondary"
@@ -46,36 +37,25 @@ const DeliveryForm = ({ handleChange, errors, values, typeInCart }) => {
             error={errors.disponibilidadServicio && true}
             helperText={errors.disponibilidadServicio}
           />
-          <h3>Nos comunicaremos con usted para coordinar una fecha.</h3>
+          <p style={{marginTop: "1rem", fontWeight: "600"}}>Nos comunicaremos con usted para coordinar una fecha.</p>
         </div>
       )}
       {(typeInCart === "Products" || typeInCart === "Products-Services") && (
         <div>
-          <Typography
-            marginTop={"5rem"}
-            marginBottom={"2rem"}
-            variant="h3"
-            color="secondary.dark"
-            fontWeight={600}
-          >
-            ¿Como queres recibir el producto?
-          </Typography>
-          <FormControl>
-            <RadioGroup defaultValue={"REL"}>
-              <div style={{ display: "flex", gap: "10px" }}>
-                <Button variant="outlined">
+          <h1 className={styles.titles}>¿Como queres recibir el producto?</h1>
+          <FormControl style={{width: "100%"}}>
+            <RadioGroup  defaultValue={"REL"}>
+              <div style={{ marginTop: "1rem", justifyContent:"center", display: "flex", gap: "10px" }}>
+                <Button style={{padding: "1rem"}} variant="outlined">
                   <FormControlLabel
+                   style={{margin: 0}}
                     name="formaEnvio"
                     onChange={handleChange}
                     value="REL"
-                    control={<Radio />}
+                    control={<Radio style={{padding: ".5rem"}} />}
                     label={
                       <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: 4,
-                        }}
+                        className={styles.btnFormaEnvio}
                       >
                         <AddBusinessRoundedIcon fontSize="large" /> Retiro en
                         Local
@@ -83,19 +63,16 @@ const DeliveryForm = ({ handleChange, errors, values, typeInCart }) => {
                     }
                   />
                 </Button>
-                <Button variant="outlined">
+                <Button style={{padding: "1rem"}} variant="outlined">
                   <FormControlLabel
+                    style={{margin: 0}}
                     name="formaEnvio"
                     onChange={handleChange}
                     value="EAD"
-                    control={<Radio />}
+                    control={<Radio style={{padding: ".5rem"}} />}
                     label={
                       <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: 4,
-                        }}
+                      className={styles.btnFormaEnvio}
                       >
                         <LocalShippingRoundedIcon fontSize="large" /> Entrega a
                         domicilio

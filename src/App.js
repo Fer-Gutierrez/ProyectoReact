@@ -9,7 +9,6 @@ import CartContainer from "./components/Cart/CartContainer";
 import YesNoModal from "./utils/modals/YesNoModal/YesNoModal";
 import CheckoutFormContainer from "./components/CheckoutForm/CheckoutFormContainer";
 
-
 const theme = createTheme({
   typography: {
     fontFamily: ["Inter", "Roboto", "sans-serif"].join(","),
@@ -22,6 +21,10 @@ const theme = createTheme({
       dark: colors.blueGrey[900],
     },
     secondary: { light: "#edebe8", main: "#d0a9a2", dark: "#d0a9a2" },
+    light: {
+      main: "#edebe8",
+      contrastText: '#37474f',
+    },
   },
 });
 
@@ -31,30 +34,27 @@ function App() {
       <div>
         <BrowserRouter>
           <CartContextProvider>
-              <Routes>
-                <Route element={<NavbarContainer />}>
-                  <Route path="/" element={<ItemListContainer />} />
-                  <Route
-                    path="/category/:categoryName"
-                    element={<ItemListContainer />}
-                  />
-                  <Route
-                    path="/itemdetail/:id"
-                    element={<ItemDetailContainer />}
-                  />
-                  <Route path="/cart" element={<CartContainer />} />
-                  <Route
-                    path="/checkoutform"
-                    element={<CheckoutFormContainer />}
-                  />
-                </Route>
-
-                {/* Ruta para páginas nos encontradas */}
+            <Routes>
+              <Route element={<NavbarContainer />}>
+                <Route path="/" element={<ItemListContainer />} />
                 <Route
-                  path="*"
-                  element={<h1>Lo siento la ruta no existe</h1>}
+                  path="/category/:categoryName"
+                  element={<ItemListContainer />}
                 />
-              </Routes>
+                <Route
+                  path="/itemdetail/:id"
+                  element={<ItemDetailContainer />}
+                />
+                <Route path="/cart" element={<CartContainer />} />
+                <Route
+                  path="/checkoutform"
+                  element={<CheckoutFormContainer />}
+                />
+              </Route>
+
+              {/* Ruta para páginas nos encontradas */}
+              <Route path="*" element={<h1>Lo siento la ruta no existe</h1>} />
+            </Routes>
           </CartContextProvider>
           <AlertToastify />
           <YesNoModal />

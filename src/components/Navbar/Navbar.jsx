@@ -31,13 +31,11 @@ const Navbar = ({ total, categories, navOpen, setNavOpen }) => {
               categories.map((category) => {
                 return (
                   <Link variant="button" key={category?.id} to={category?.path}>
-                    <Typography
-                      variant="h6"
-                      color="primary.main"
-                      fontWeight="400"
+                    <h1
+                     className={styles.btnLinks}
                     >
                       {category?.name}
-                    </Typography>
+                    </h1>
                   </Link>
                 );
               })}

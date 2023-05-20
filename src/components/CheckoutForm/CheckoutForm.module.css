@@ -1,21 +1,8 @@
-.btnDeleteCart {
-  margin: 1rem 0.4rem 0 1rem !important;
-  padding: 0.6rem !important;
-  font-size: 1.4rem !important;
-}
-
-.cartTitle {
-  font-size: 3rem !important;
-  font-weight: 600 !important;
+.titles {
+  font-size: 3rem;
   color: var(--secondaryMainColor);
-  margin: 1rem 0;
-  align-self: center;
-}
-
-.totalPriceContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  font-weight: 600;
+  text-align: center;
 }
 
 .boxTotalPrice {
@@ -31,9 +18,10 @@
 }
 
 .totalPriceText {
-  margin-top: 2.5rem;
+  margin-top: 2rem;
   color: var(--primaryDarkColor);
 }
+
 .totalQuantityCart {
   font-size: 1.2rem;
   color: var(--primaryLinghtColor);
@@ -41,7 +29,29 @@
   margin-bottom: 2rem;
 }
 
+p {
+  font-size: 1.4rem;
+  font-weight: 300;
+  margin: 1.5rem 0 1rem 0;
+}
+
+.btnFormaEnvio {
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
 @media (max-width: 600px) {
+  .titles {
+    font-size: 2.5rem;
+  }
+
+  p {
+    font-size: 1.1rem;
+    text-align: center;
+  }
+
   .boxTotalPrice {
     font-size: 2.5rem;
   }
@@ -50,17 +60,26 @@
     font-size: 1rem;
   }
 
-  .btnDeleteCart {
-    font-size: 1rem !important;
+  .btnFormaEnvio {
+    font-size: 1rem;
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 480px) {
   .boxTotalPrice {
     font-size: 2rem;
   }
 
-  .btnDeleteCart {
-    font-size: 0.8rem !important;
+  .titles {
+    font-size: 2rem;
+  }
+
+  p {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .btnFormaEnvio {
+    font-size: 0.6rem;
   }
 }
