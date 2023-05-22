@@ -54,6 +54,7 @@ const ItemDetail = ({
                   decrement={decrement}
                   increment={increment}
                 />
+
                 <Tooltip title="Agregar al carrito">
                   <Button
                     variant="contained"

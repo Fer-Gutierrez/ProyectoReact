@@ -23,7 +23,7 @@ const Cart = ({
             navigate={navigate}
           />
           <div className={styles.totalPriceContainer}>
-            <h1 className={styles.totalPriceText}>Total de tu compra:</h1>
+            <h1 className={styles.totalPriceText}>Total de tu compra</h1>
             <div className={styles.boxTotalPrice}>
               {"$ "}{" "}
               {Number(totalPrice).toLocaleString("es-AR", {
