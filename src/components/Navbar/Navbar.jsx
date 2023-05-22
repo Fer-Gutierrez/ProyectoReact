@@ -14,7 +14,14 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Loader from "../Loader/Loader";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
-const Navbar = ({ total, categories, navOpen, setNavOpen }) => {
+const Navbar = ({
+  total,
+  categories,
+  navOpen,
+  setNavOpen,
+  setCategorySelected,
+  categorySelected,
+}) => {
   return categories.length > 0 ? (
     <div>
       <div className={styles.navbar}>
@@ -30,9 +37,19 @@ const Navbar = ({ total, categories, navOpen, setNavOpen }) => {
             {categories.length > 0 &&
               categories.map((category) => {
                 return (
-                  <Link variant="button" key={category?.id} to={category?.path}>
+                  <Link
+                    onClick={() => setCategorySelected(category?.name)}
+                    variant="button"
+                    key={category?.id}
+                    to={category?.path}
+                  >
                     <h1
-                     className={styles.btnLinks}
+                      className={
+                        category?.name === categorySelected
+                          ? styles.btnLinkActive
+                          : styles.btnLinks
+                      }
+                      // className={ styles.btnLinks}
                     >
                       {category?.name}
                     </h1>
@@ -44,12 +61,20 @@ const Navbar = ({ total, categories, navOpen, setNavOpen }) => {
         <div>
           {total > 0 ? (
             <div className={styles.contenedorCartMenu}>
-              <Link to={"/cart"} className={styles.cartWidget}>
+              <Link
+                to={"/cart"}
+                className={
+                  categorySelected === "Cart"
+                    ? styles.cartWidgetActive
+                    : styles.cartWidget
+                }
+                onClick={() => setCategorySelected("Cart")}
+              >
                 <CartWidget />
               </Link>
               <Hidden smUp>
                 <IconButton onClick={() => setNavOpen(true)}>
-                  <MenuIcon style={{ fontSize: "3rem" }} />
+                  <MenuIcon style={{ fontSize: "3rem" }} color="light" />
                 </IconButton>
               </Hidden>
             </div>
@@ -57,7 +82,7 @@ const Navbar = ({ total, categories, navOpen, setNavOpen }) => {
             <div>
               <Hidden smUp>
                 <IconButton onClick={() => setNavOpen(true)}>
-                  <MenuIcon style={{ fontSize: "3rem" }} />
+                  <MenuIcon style={{ fontSize: "3rem" }} color="light" />
                 </IconButton>
               </Hidden>
             </div>

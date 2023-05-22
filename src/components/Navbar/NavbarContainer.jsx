@@ -8,6 +8,7 @@ import UseAlert from "../../utils/alerts/UseAlert";
 
 const NavbarContainer = () => {
   const [categories, setCategories] = useState([]);
+  const [categorySelected, setCategorySelected] = useState("Todas");
   const { alertInfo } = UseAlert();
   const [navOpen, setNavOpen] = useState(false);
 
@@ -29,6 +30,7 @@ const NavbarContainer = () => {
       });
   }, []);
 
+
   return (
     <>
       <Navbar
@@ -36,6 +38,8 @@ const NavbarContainer = () => {
         setNavOpen={setNavOpen}
         total={total}
         categories={categories}
+        setCategorySelected={setCategorySelected}
+        categorySelected={categorySelected}
       />
       {categories.length > 0 && <Outlet />}
     </>

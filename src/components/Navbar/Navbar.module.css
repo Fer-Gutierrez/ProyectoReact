@@ -49,12 +49,36 @@
   color: var(--secondaryLinghtColor);
 }
 
+.btnLinks::after {
+  content: "";
+  display: block;
+  height: 2px;
+  background-color: var(--primaryMaintColor);
+  opacity: 80%;
+  transform: scale(0, 1);
+  transform-origin: center;
+  transition: transform 0.5s;
+}
+
+.btnLinks:hover::after {
+  transform: scale(1, 1);
+}
+
+.btnLinkActive {
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: var(--primaryMaintColor);
+}
+
 .navbar .cartWidget {
-  color:var(--secondaryLinghtColor);
+  color: var(--secondaryLinghtColor);
+}
+
+.navbar .cartWidgetActive {
+  color: var(--primaryMaintColor);
 }
 
 .contenedorCartMenu {
   display: flex;
   align-items: center;
 }
-
