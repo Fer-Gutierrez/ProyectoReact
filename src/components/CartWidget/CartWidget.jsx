@@ -3,6 +3,7 @@ import styles from "./CartWidget.module.css";
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 
+ 
 const CartWidget = () => {
   const { getTotalQuantityCart } = useContext(CartContext);
   let total = getTotalQuantityCart();

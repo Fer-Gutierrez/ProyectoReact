@@ -8,6 +8,7 @@ import CartContextProvider from "./context/CartContext";
 import CartContainer from "./components/Cart/CartContainer";
 import YesNoModal from "./utils/modals/YesNoModal/YesNoModal";
 import CheckoutFormContainer from "./components/CheckoutForm/CheckoutFormContainer";
+import HomeContainer from "./components/Home/HomeContainer";
 
 const theme = createTheme({
   typography: {
@@ -23,7 +24,7 @@ const theme = createTheme({
     secondary: { light: "#edebe8", main: "#d0a9a2", dark: "#d0a9a2" },
     light: {
       main: "#edebe8",
-      contrastText: '#37474f',
+      contrastText: "#37474f",
     },
   },
 });
@@ -36,6 +37,7 @@ function App() {
           <CartContextProvider>
             <Routes>
               <Route element={<NavbarContainer />}>
+                <Route path="/home" element={<HomeContainer />} />
                 <Route path="/" element={<ItemListContainer />} />
                 <Route
                   path="/category/:categoryName"

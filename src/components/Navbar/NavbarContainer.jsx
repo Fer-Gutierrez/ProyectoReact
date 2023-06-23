@@ -22,6 +22,7 @@ const NavbarContainer = () => {
         const resultCategories = res.docs.map((cat) => {
           return { ...cat.data(), id: cat.id };
         });
+        resultCategories.sort((a, b) => a.position - b.position);
         setCategories(resultCategories);
       })
       .catch((err) => {
@@ -29,7 +30,6 @@ const NavbarContainer = () => {
         alertInfo(`Erro al intentar obtener las categorias`);
       });
   }, []);
-
 
   return (
     <>
